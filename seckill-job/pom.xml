@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>seckill-job</artifactId>
+    <name>seckill-job</name>
+    <description>秒杀系统job</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -17,4 +19,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>cn.net.zhu</groupId>
+            <artifactId>seckill-business</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 </project>
