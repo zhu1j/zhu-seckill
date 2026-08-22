@@ -18,6 +18,7 @@ public class RequestPageEntity {
     private Integer pageSize = 10;
     private String sortField;
 
+    //这个方法返回的是 跳过多少条记录
     public int getPageBegin() {
         return (pageNo - 1)* pageSize;
     }
