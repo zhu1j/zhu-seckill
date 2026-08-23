@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *  全局异常处理类
+ *  全局异常处理器类
  *
  * @author 一只朱
  * @date 2026-08-23 03:06
