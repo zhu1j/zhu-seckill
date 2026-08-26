@@ -4,42 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.8.23第三次提交">
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/EsBaseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth/AuthUserEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth/CaptchaEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth/TokenEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/mq/OrderTimeoutMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/product/ESSeckillProductConditionEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/response/SeckillResultResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/ESSeckillProductEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillOrderTradeConditionEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillOrderTradeEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillPaymentEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillProductDetailPageEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillProductEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundLogEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductQueryEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductTradeEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/user/SeckillUserEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/user/UserRegisterEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillPaymentMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillProductMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillRefundLogMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillRefundMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillUserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillProductMapper.xml" afterDir="false" />
+    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.8.24第四次提交">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/user/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/user/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/exception/BusinessException.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/exception/BusinessException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/AssertUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/AssertUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/RedisUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/RedisUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/SnowFlakeIdWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/SnowFlakeIdWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillProductMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +153,9 @@
       <workItem from="1787309765631" duration="101000" />
       <workItem from="1787395023289" duration="5858000" />
       <workItem from="1787418311454" duration="4070000" />
-      <workItem from="1787468414252" duration="9925000" />
+      <workItem from="1787468414252" duration="10166000" />
+      <workItem from="1787558064774" duration="5329000" />
+      <workItem from="1787728310105" duration="7638000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <option name="closed" value="true" />
@@ -211,7 +181,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787431284289</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="2026.8.24第四次提交">
+      <option name="closed" value="true" />
+      <created>1787514320040</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1787514320040</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +199,7 @@
     <MESSAGE value="第一次提交" />
     <MESSAGE value="2026.8.11第二次提交" />
     <MESSAGE value="2026.8.23第三次提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="2026.8.23第三次提交" />
+    <MESSAGE value="2026.8.24第四次提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="2026.8.24第四次提交" />
   </component>
 </project>

@@ -37,6 +37,7 @@ public interface SeckillProductMapper {
 
         /**
          * 扣减预锁定库存（下单冻结库存）
+         * 原子预扣库存
          * @param id 秒杀商品id
          * @return 受影响行数
          */
@@ -44,6 +45,7 @@ public interface SeckillProductMapper {
 
         /**
          * 恢复预锁定库存（订单超时/取消释放冻结库存）
+         * 恢复预扣库存
          * @param id 秒杀商品id
          * @return 受影响行数
          */
