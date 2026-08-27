@@ -101,13 +101,13 @@
                 AND product_name LIKE CONCAT('%',#{productName},'%')
             </if>
             <if test="model != null and model !=''">
-                AND model = {model}
+                AND model = #{model}
             </if>
             <if test="price != null">
                 AND price = #{price}
             </if>
             <if test="costPrice != null">
-                AND costPrice = #{costPrice}
+                AND cost_price = #{costPrice}
             </if>
             <if test="quantity != null">
                 AND quantity = #{quantity}
@@ -137,6 +137,12 @@
         </where>
     </sql>
 
+    <sql id="paginationSql">
+        <if test="pageSize > 0">
+            LIMIT #{pageBegin}, #{pageSize}
+        </if>
+    </sql>
+
     <select id="findById" parameterType="Long"
             resultMap="SeckillOrderTradeResult">
         select
@@ -159,7 +165,29 @@
         SELECT
             <include refid="selectSeckillOrderTradeColumn"/>
             FROM seckill_order_trade
-        <include refid=""/>
+        <include refid="queryWhere"/>
+        <include refid="paginationSql"></include>
     </select>
+
+    <select id="searchCount"
+            parameterType = "cn.net.zhu.seckill.business.entity.seckill.SeckillOrderTradeConditionEntity"
+            resultType="int">
+        SELECT
+            COUNT(*)
+        FROM seckill_order_trade
+        <include refid="queryWhere"/>
+    </select>
+
+    <update id="update" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillOrderTradeConditionEntity">
+        UPDATE seckill_order_trade
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tradeId != null">
+                trade_id = #{tradeId},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+        </trim>
+    </update>
 
 </mapper>

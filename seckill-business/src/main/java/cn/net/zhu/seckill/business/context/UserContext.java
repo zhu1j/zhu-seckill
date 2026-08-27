@@ -13,7 +13,7 @@ import com.alibaba.ttl.TransmittableThreadLocal;
  */
 
 public class UserContext {
-    private static final TreadLocal<UserEntity> USER_HOLDER = new TransmittableThreadLocal<>();
+    private static final ThreadLocal<UserEntity> USER_HOLDER = new TransmittableThreadLocal<>();
 
     public static UserEntity getCurrentUser() {
         return USER_HOLDER.get();

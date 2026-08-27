@@ -14,8 +14,6 @@
         <module>seckill-api</module>
         <module>seckill-job</module>
         <module>seckill-business</module>
-        <module>seckill-job</module>
-        <module>seckill-business</module>
     </modules>
 
     <parent>
