@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.net.zhu.seckill.business.mapper.seckill.SeckillProductMapper">
+
+    <resultMap id="BaseResultMap" type="cn.net.zhu.seckill.business.entity.seckill.SeckillProductEntity">
+        <id column="id" property="id"/>
+        <result column="product_id" property="productId"/>
+        <result column="with_hold_quantity" property="withHoldQuantity"/>
+        <result column="remain_quantity" property="remainQuantity"/>
+        <result column="price" property="price"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="create_user_name" property="createUserName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user_id" property="updateUserId"/>
+        <result column="update_user_name" property="updateUserName"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_del" property="isDel"/>
+    </resultMap>
+
+    <select id="findById" resultMap="BaseResultMap">
+        SELECT * FROM seckill_product WHERE id = #{id} AND is_del = 0
+    </select>
+
+    <insert id="insert" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillProductEntity">
+        INSERT INTO seckill_product (id, product_id, with_hold_quantity, remain_quantity, price,
+                                     start_time, end_time, create_user_id, create_user_name, create_time, is_del)
+        VALUES (#{id}, #{productId}, #{withHoldQuantity}, #{remainQuantity}, #{price},
+                #{startTime}, #{endTime}, #{createUserId}, #{createUserName}, now(3), 0)
+    </insert>
+
+    <update id="update">
+        UPDATE seckill_product
+        <set>
+            <if test="withHoldQuantity != null">with_hold_quantity = #{withHoldQuantity},</if>
+            <if test="remainQuantity != null">remain_quantity = #{remainQuantity},</if>
+            <if test="price != null">price = #{price},</if>
+            update_time = now(3)
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 核心：原子预扣库存 -->
+    <update id="reduceWithHoldStock">
+        UPDATE seckill_product
+        SET with_hold_quantity = with_hold_quantity - 1,
+            update_time = now(3)
+        WHERE id = #{id} AND with_hold_quantity > 0
+    </update>
+
+    <!-- 核心：恢复预扣库存 -->
+    <update id="restoreWithHoldStock">
+        UPDATE seckill_product
+        SET with_hold_quantity = with_hold_quantity + 1,
+            update_time = now(3)
+        WHERE id = #{id}
+    </update>
+</mapper>

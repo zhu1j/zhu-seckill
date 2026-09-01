@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.8.26第五次提交">
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/helper/IdGenerateHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/BusinessKeyUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/OrderCodeUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/PasswordUtil.java" afterDir="false" />
+    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.8.27第六次提交">
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillPaymentMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/ApiApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/ApiApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/context/UserContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/context/UserContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/AssertUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/AssertUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/RedisUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/RedisUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/SnowFlakeIdWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/SnowFlakeIdWorker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,38 +61,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "HTTP Request.generated-requests | #4.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "Maven.zhu-seckill [clean].executor": "Run",
-    "Maven.zhu-seckill [compile].executor": "Run",
-    "Maven.zhu-seckill [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.ApiApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/34129/Desktop/个人待办/精进计划/self/seckill/sql",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.3402299",
-    "settings.editor.selected.configurable": "editing.templates",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;HTTP Request.generated-requests | #4.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.zhu-seckill [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.zhu-seckill [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.zhu-seckill [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/34129/Desktop/个人待办/精进计划/self/seckill/sql&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.3402299&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\sql" />
@@ -169,7 +159,8 @@
       <workItem from="1787468414252" duration="10166000" />
       <workItem from="1787558064774" duration="5329000" />
       <workItem from="1787728310105" duration="8867000" />
-      <workItem from="1787796410199" duration="10317000" />
+      <workItem from="1787796410199" duration="10351000" />
+      <workItem from="1788272436406" duration="5307000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <option name="closed" value="true" />
@@ -211,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787750901128</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="2026.8.27第六次提交">
+      <option name="closed" value="true" />
+      <created>1787844069389</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1787844069389</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +222,7 @@
     <MESSAGE value="2026.8.23第三次提交" />
     <MESSAGE value="2026.8.24第四次提交" />
     <MESSAGE value="2026.8.26第五次提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="2026.8.26第五次提交" />
+    <MESSAGE value="2026.8.27第六次提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="2026.8.27第六次提交" />
   </component>
 </project>

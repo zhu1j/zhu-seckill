@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.net.zhu.seckill.business.mapper.seckill.SeckillOrderTradeMapper">
+
+    <resultMap id="SeckillOrderTradeResult" type="cn.net.zhu.seckill.business.entity.seckill.SeckillOrderTradeEntity">
+        <result property="id" column="id" />
+        <result property="tradeId" column="trade_id"/>
+        <result property="code" column="code" />
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="orderTime" column="order_time"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="paymentAmount" column="payment_amount"/>
+        <result property="seckillProductId" column="seckill_product_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="model" column="model"/>
+        <result property="price" column="price"/>
+        <result property="costPrice" column="cost_price"/>
+        <result property="quantity" column="quantity"/>
+        <result property="remark" column="remark"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="createUserName" column="create_user_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateUserId" column="update_user_id"/>
+        <result property="updateUserName" column="update_user_name"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="isDel" column="is_del"/>
+    </resultMap>

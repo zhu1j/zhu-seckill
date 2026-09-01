@@ -187,7 +187,234 @@
             <if test="code != null and code != ''">
                 code = #{code},
             </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="orderTime != null">
+                order_time = #{orderTime},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus},
+            </if>
+            <if test="payStatus != null">
+                pay_status = #{payStatus},
+            </if>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount},
+            </if>
+            <if test="paymentAmount != null">
+                payment_amount = #{paymentAmount},
+            </if>
+            <if test="seckillProductId != null">
+                seckill_product_id = #{seckillProductId},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId},
+            </if>
+            <if test="productName != null and productName != ''">
+                product_name = #{productName},
+            </if>
+            <if test="model != null and model != ''">
+                model = #{model},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="costPrice != null">
+                cost_price = #{costPrice},
+            </if>
+            <if test="quantity != null">
+                quantity = #{quantity},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createUserName != null and createUserName != ''">
+                create_user_name = #{createUserName},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="updateUserName != null and updateUserName != ''">
+                update_user_name = #{updateUserName},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel},
+            </if>
+
+            update_time = now(3)
         </trim>
+        WHERE id = #{id}
     </update>
+
+    <insert id="insert" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillOrderTradeEntity" keyProperty="id" userGeneratedKeys="true">
+        INSERT INTO seckill_order_trade
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tradeId != null">
+                trade_id,
+            </if>
+                <if test="code != null and code != ''">
+                    code,
+                </if>
+                <if test="userId != null">
+                    user_id,
+                </if>
+                <if test="userName != null and userName != ''">
+                    user_name,
+                </if>
+                <if test="orderTime != null">
+                    order_time,
+                </if>
+                <if test="orderStatus != null">
+                    order_status,
+                </if>
+                <if test="payStatus != null">
+                    pay_status,
+                </if>
+                <if test="totalAmount != null">
+                    total_amount,
+                </if>
+                <if test="paymentAmount != null">
+                    payment_amount,
+                </if>
+                <if test="seckillProductId != null">
+                    seckill_product_id,
+                </if>
+                <if test="productId != null">
+                    product_id,
+                </if>
+                <if test="productName != null and productName != ''">
+                    product_name,
+                </if>
+                <if test="model != null and model != ''">
+                    model,
+                </if>
+                <if test="price != null">
+                    price,
+                </if>
+                <if test="costPrice != null">
+                    cost_price,
+                </if>
+                <if test="quantity != null">
+                    quantity,
+                </if>
+                <if test="remark != null and remark != ''">
+                    remark,
+                </if>
+                <if test="createUserId != null">
+                    create_user_id,
+                </if>
+                <if test="createUserName != null and createUserName != ''">
+                    create_user_name,
+                </if>
+                <if test="createTime != null">
+                    create_time,
+                </if>
+                <if test="updateUserId != null">
+                    update_user_id,
+                </if>
+                <if test="updateUserName != null and updateUserName != ''">
+                    update_user_name,
+                </if>
+                <if test="updateTime != null">
+                    update_time,
+                </if>
+                <if test="isDel != null">
+                    is_del,
+                </if>
+        </trim>
+                <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="id != null">
+                        #{id},
+                    </if>
+                    <if test="tradeId != null">
+                        trade_id = #{tradeId},
+                    </if>
+                    <if test="code != null and code != ''">
+                        code = #{code},
+                    </if>
+                    <if test="userId != null">
+                        user_id = #{userId},
+                    </if>
+                    <if test="userName != null and userName != ''">
+                        user_name = #{userName},
+                    </if>
+                    <if test="orderTime != null">
+                        order_time = #{orderTime},
+                    </if>
+                    <if test="orderStatus != null">
+                        order_status = #{orderStatus},
+                    </if>
+                    <if test="payStatus != null">
+                        pay_status = #{payStatus},
+                    </if>
+                    <if test="totalAmount != null">
+                        total_amount = #{totalAmount},
+                    </if>
+                    <if test="paymentAmount != null">
+                        payment_amount = #{paymentAmount},
+                    </if>
+                    <if test="seckillProductId != null">
+                        seckill_product_id = #{seckillProductId},
+                    </if>
+                    <if test="productId != null">
+                        product_id = #{productId},
+                    </if>
+                    <if test="productName != null and productName != ''">
+                        product_name = #{productName},
+                    </if>
+                    <if test="model != null and model != ''">
+                        model = #{model},
+                    </if>
+                    <if test="price != null">
+                        price = #{price},
+                    </if>
+                    <if test="costPrice != null">
+                        cost_price = #{costPrice},
+                    </if>
+                    <if test="quantity != null">
+                        quantity = #{quantity},
+                    </if>
+                    <if test="remark != null and remark != ''">
+                        remark = #{remark},
+                    </if>
+                    <if test="createUserId != null">
+                        create_user_id = #{createUserId},
+                    </if>
+                    <if test="createUserName != null and createUserName != ''">
+                        create_user_name = #{createUserName},
+                    </if>
+                    <if test="createTime != null">
+                        create_time = #{createTime},
+                    </if>
+                    <if test="updateUserId != null">
+                        update_user_id = #{updateUserId},
+                    </if>
+                    <if test="updateUserName != null and updateUserName != ''">
+                        update_user_name = #{updateUserName},
+                    </if>
+                    <if test="updateTime != null">
+                        update_time = #{updateTime},
+                    </if>
+                    <if test="isDel != null">
+                        is_del = #{isDel},
+                    </if>
+                </trim>
+    </insert>
 
 </mapper>

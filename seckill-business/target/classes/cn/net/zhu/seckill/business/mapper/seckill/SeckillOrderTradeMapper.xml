@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.net.zhu.seckill.business.mapper.seckill.SeckillOrderTradeMapper">
+
+    <resultMap id="SeckillOrderTradeResult" type="cn.net.zhu.seckill.business.entity.seckill.SeckillOrderTradeEntity">
+        <result property="id" column="id" />
+        <result property="tradeId" column="trade_id"/>
+        <result property="code" column="code" />
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="orderTime" column="order_time"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="paymentAmount" column="payment_amount"/>
+        <result property="seckillProductId" column="seckill_product_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="model" column="model"/>
+        <result property="price" column="price"/>
+        <result property="costPrice" column="cost_price"/>
+        <result property="quantity" column="quantity"/>
+        <result property="remark" column="remark"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="createUserName" column="create_user_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateUserId" column="update_user_id"/>
+        <result property="updateUserName" column="update_user_name"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="isDel" column="is_del"/>
+    </resultMap>
+
+    <sql id="selectSeckillOrderTradeColumn">
+        id,
+        trade_id,
+        code,
+        user_id,
+        user_name,
+          order_time,
+          order_status,
+          pay_status,
+          total_amount,
+          payment_amount,
+          seckill_product_id,
+          product_id,
+          product_name,
+          model,
+          price,
+          cost_price,
+          quantity,
+          remark,
+          create_user_id,
+          create_user_name,
+          create_time,
+          update_user_id,
+          update_user_name,
+          update_time,
+          is_del
+    </sql>
+
+    <sql id="queryWhere">
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="tradeId != null">
+                AND trade_id = #{tradeId}
+            </if>
+             <if test="code != null and code !=''">
+                 AND code LIKE CONCAT('%',#{code},'%')
+             </if>
+             <if test="userId != null">
+                 AND user_id = #{userId}
+             </if>
+             <if test="userName != null and userName != ''">
+                 AND user_name = #{userName}
+             </if>
+             <if test="orderTime != null">
+                 AND order_time = #{orderTime}
+             </if>
+             <if test="orderStatus != null">
+                 AND order_status = #{orderStatus}
+             </if>
+             <if test="payStatus != null">
+                 AND pay_status = #{payStatus}
+             </if>
+             <if test="totalAmount != null">
+                 AND total_amount = #{totalAmount}
+             </if>
+             <if test="paymentAmount != null">
+                 AND payment_amount = #{paymentAmount}
+             </if>
+             <if test="seckillProductId != null">
+                 AND seckill_product_id = #{seckillProductId}
+             </if>
+             <if test="productId != null">
+                 AND product_id = #{productId}
+             </if>
+            <if test="productName != null and productName != ''">
+                AND product_name LIKE CONCAT('%',#{productName},'%')
+            </if>
+            <if test="model != null and model !=''">
+                AND model = #{model}
+            </if>
+            <if test="price != null">
+                AND price = #{price}
+            </if>
+            <if test="costPrice != null">
+                AND cost_price = #{costPrice}
+            </if>
+            <if test="quantity != null">
+                AND quantity = #{quantity}
+            </if>
+            <if test="remark != null and remark != ''">
+                AND remark = #{remark}
+            </if>
+            <if test="createUserId != null">
+                AND create_user_id = #{createUserId}
+            </if>
+            <if test="createUserName != null and createUserName != ''">
+                AND create_user_name = #{createUserName}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime}
+            </if>
+            <if test="updateUserId != null">
+                AND update_user_id = #{updateUserId}
+            </if>
+            <if test="updateUserName != null and updateUserName != ''">
+                AND update_user_name = #{updateUserName}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime}
+            </if>
+            AND is_del = 0
+        </where>
+    </sql>
+
+    <sql id="paginationSql">
+        <if test="pageSize > 0">
+            LIMIT #{pageBegin}, #{pageSize}
+        </if>
+    </sql>
+
+    <select id="findById" parameterType="Long"
+            resultMap="SeckillOrderTradeResult">
+        select
+            <include refid="selectSeckillOrderTradeColumn"></include>
+            from seckill_order_trade
+        where id = #{id}
+    </select>
+
+    <select id="findByCode" parameterType="String"
+            resultMap="SeckillOrderTradeResult">
+        select
+            <include refid="selectSeckillOrderTradeColumn"/>
+            from seckill_order_trade
+        where code = #{code} and is_del = 0
+    </select>
+
+    <select id="searchByCondition"
+            parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillOrderTradeConditionEntity"
+            resultMap="SeckillOrderTradeResult">
+        SELECT
+            <include refid="selectSeckillOrderTradeColumn"/>
+            FROM seckill_order_trade
+        <include refid="queryWhere"/>
+        <include refid="paginationSql"></include>
+    </select>
+
+</mapper>
