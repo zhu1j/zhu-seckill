@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.net.zhu.seckill.business.mapper.seckill.SeckillPaymentMapper">
+<mapper namespace="cn.net.zhu.seckill.business.mapper.seckill.SeckillRefundMapper">
 
-    <resultMap id="SeckillPaymentResult" type="cn.net.zhu.seckill.business.entity.seckill.SeckillPaymentEntity">
-        <result property="id" column="id" />
-        <result property="paymentNo" column="payment_no"/>
-        <result property="orderId" column="order_id" />
+    <resultMap type="cn.net.zhu.seckill.business.entity.seckill.SeckillRefundEntity" id="SeckillRefundResult">
+        <result property="id" column="id"/>
+        <result property="refundNo" column="refund_no"/>
+        <result property="orderId" column="order_id"/>
         <result property="orderCode" column="order_code"/>
+        <result property="paymentId" column="payment_id"/>
+        <result property="paymentNo" column="payment_no"/>
         <result property="userId" column="user_id"/>
         <result property="userName" column="user_name"/>
-        <result property="paymentAmount" column="payment_amount"/>
-        <result property="paymentMethod" column="payment_method"/>
-        <result property="paymentStatus" column="payment_status"/>
-        <result property="thirdPartyTransactionNo" column="third_party_transaction_no"/>
-        <result property="paymentTime" column="payment_time"/>
         <result property="refundAmount" column="refund_amount"/>
+        <result property="refundReason" column="refund_reason"/>
+        <result property="refundType" column="refund_type"/>
+        <result property="refundStatus" column="refund_status"/>
+        <result property="applyTime" column="apply_time"/>
+        <result property="auditTime" column="audit_time"/>
+        <result property="auditUserId" column="audit_user_id"/>
+        <result property="auditUserName" column="audit_user_name"/>
+        <result property="auditRemark" column="audit_remark"/>
         <result property="refundTime" column="refund_time"/>
+        <result property="thirdPartyRefundNo" column="third_party_refund_no"/>
         <result property="remark" column="remark"/>
         <result property="createUserId" column="create_user_id"/>
         <result property="createUserName" column="create_user_name"/>
@@ -27,20 +33,26 @@
         <result property="isDel" column="is_del"/>
     </resultMap>
 
-    <sql id="selectSeckillPaymentColumn">
+    <sql id="selectSeckillRefundColumn">
         id,
-         payment_no,
+         refund_no,
          order_id,
          order_code,
+         payment_id,
+         payment_no,
          user_id,
          user_name,
-         payment_amount,
-         payment_method,
-         payment_status,
-         third_party_transaction_no,
-         payment_time,
          refund_amount,
+         refund_reason,
+         refund_type,
+         refund_status,
+         apply_time,
+         audit_time,
+         audit_user_id,
+         audit_user_name,
+         audit_remark,
          refund_time,
+         third_party_refund_no,
          remark,
          create_user_id,
          create_user_name,
@@ -51,14 +63,14 @@
          is_del
     </sql>
 
-    <insert id="insert" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillPaymentEntity">
-        INSERT INTO seckill_payment
+    <insert id="insert" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillRefundEntity">
+        INSERT INTO seckill_refund
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="paymentNo != null and paymentNo != ''">
-                payment_no,
+            <if test="refundNo != null and refundNo != ''">
+                refund_no,
             </if>
             <if test="orderId != null">
                 order_id,
@@ -66,29 +78,44 @@
             <if test="orderCode != null and orderCode != ''">
                 order_code,
             </if>
+            <if test="paymentId != null">
+                payment_id,
+            </if>
+            <if test="paymentNo != null and paymentNo != ''">
+                payment_no,
+            </if>
             <if test="userId != null">
                 user_id,
             </if>
             <if test="userName != null and userName != ''">
                 user_name,
             </if>
-            <if test="paymentAmount != null">
-                payment_amount,
-            </if>
-            <if test="paymentMethod != null">
-                payment_method,
-            </if>
-            <if test="paymentStatus != null">
-                payment_status,
-            </if>
-            <if test="thirdPartyTransactionNo != null and thirdPartyTransactionNo != ''">
-                third_party_transaction_no,
-            </if>
-            <if test="paymentTime != null">
-                payment_time,
-            </if>
             <if test="refundAmount != null">
                 refund_amount,
+            </if>
+            <if test="refundReason != null and refundReason != ''">
+                refund_reason,
+            </if>
+            <if test="refundType != null">
+                refund_type,
+            </if>
+            <if test="refundStatus != null">
+                refund_status,
+            </if>
+            <if test="applyTime != null">
+                apply_time,
+            </if>
+            <if test="auditTime != null">
+                audit_time,
+            </if>
+            <if test="auditUserId != null">
+                audit_user_id,
+            </if>
+            <if test="auditUserName != null and auditUserName != ''">
+                audit_user_name,
+            </if>
+            <if test="auditRemark != null and auditRemark != ''">
+                audit_remark,
             </if>
             <if test="refundTime != null">
                 refund_time,
@@ -125,8 +152,8 @@
             <if test="id != null">
                 #{id},
             </if>
-            <if test="paymentNo != null and paymentNo != ''">
-                #{paymentNo},
+            <if test="refundNo != null and refundNo != ''">
+                #{refundNo},
             </if>
             <if test="orderId != null">
                 #{orderId},
@@ -134,29 +161,44 @@
             <if test="orderCode != null and orderCode != ''">
                 #{orderCode},
             </if>
+            <if test="paymentId != null">
+                #{paymentId},
+            </if>
+            <if test="paymentNo != null and paymentNo != ''">
+                #{paymentNo},
+            </if>
             <if test="userId != null">
                 #{userId},
             </if>
             <if test="userName != null and userName != ''">
                 #{userName},
             </if>
-            <if test="paymentAmount != null">
-                #{paymentAmount},
-            </if>
-            <if test="paymentMethod != null">
-                #{paymentMethod},
-            </if>
-            <if test="paymentStatus != null">
-                #{paymentStatus},
-            </if>
-            <if test="thirdPartyTransactionNo != null and thirdPartyTransactionNo != ''">
-                #{thirdPartyTransactionNo},
-            </if>
-            <if test="paymentTime != null">
-                #{paymentTime},
-            </if>
             <if test="refundAmount != null">
                 #{refundAmount},
+            </if>
+            <if test="refundReason != null and refundReason != ''">
+                #{refundReason},
+            </if>
+            <if test="refundType != null">
+                #{refundType},
+            </if>
+            <if test="refundStatus != null">
+                #{refundStatus},
+            </if>
+            <if test="applyTime != null">
+                #{applyTime},
+            </if>
+            <if test="auditTime != null">
+                #{auditTime},
+            </if>
+            <if test="auditUserId != null">
+                #{auditUserId},
+            </if>
+            <if test="auditUserName != null and auditUserName != ''">
+                #{auditUserName},
+            </if>
+            <if test="auditRemark != null and auditRemark != ''">
+                #{auditRemark},
             </if>
             <if test="refundTime != null">
                 #{refundTime},
@@ -191,34 +233,56 @@
         </trim>
     </insert>
 
-    <select id="findById" parameterType="Long" resultMap="SeckillPaymentResult">
+    <select id="findById" parameterType="Long" resultMap="SeckillRefundResult">
         SELECT
-        <include refid="selectSeckillPaymentColumn"/>
-        FROM seckill_payment
+        <include refid="selectSeckillRefundColumn"/>
+        FROM seckill_refund
         WHERE id = #{id}
         AND is_del = 0
     </select>
 
-    <select id="findByOrderCode" parameterType="String" resultMap="SeckillPaymentResult">
+
+    <select id="findByOrderCode" parameterType="String" resultMap="SeckillRefundResult">
         SELECT
-        <include refid="selectSeckillPaymentColumn"/>
-        FROM seckill_payment
+        <include refid="selectSeckillRefundColumn"/>
+        FROM seckill_refund
         WHERE order_code = #{orderCode}
         AND is_del = 0
         ORDER BY create_time DESC
     </select>
 
-    <update id="updatePaymentStatus" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillPaymentEntity">
-        UPDATE seckill_payment
-        SET payment_status = #{paymentStatus}
-        <if test="thirdPartyTransactionNo != null and thirdPartyTransactionNo != ''">
-            , third_party_transaction_no = #{thirdPartyTransactionNo}
+    <select id="findByOrderId" parameterType="Long" resultMap="SeckillRefundResult">
+        SELECT
+        <include refid="selectSeckillRefundColumn"/>
+        FROM seckill_refund
+        WHERE order_id = #{orderId}
+        AND is_del = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="findByUserId" parameterType="Long" resultMap="SeckillRefundResult">
+        SELECT
+        <include refid="selectSeckillRefundColumn"/>
+        FROM seckill_refund
+        WHERE user_id = #{userId}
+        AND is_del = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <update id="updateRefundStatus" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillRefundEntity">
+        UPDATE seckill_refund
+        SET refund_status = #{refundStatus}
+        <if test="auditTime != null">
+            , audit_time = #{auditTime}
         </if>
-        <if test="paymentTime != null">
-            , payment_time = #{paymentTime}
+        <if test="auditUserId != null">
+            , audit_user_id = #{auditUserId}
         </if>
-        <if test="refundAmount != null">
-            , refund_amount = #{refundAmount}
+        <if test="auditUserName != null and auditUserName != ''">
+            , audit_user_name = #{auditUserName}
+        </if>
+        <if test="auditRemark != null and auditRemark != ''">
+            , audit_remark = #{auditRemark}
         </if>
         <if test="refundTime != null">
             , refund_time = #{refundTime}
@@ -239,11 +303,11 @@
         AND is_del = 0
     </update>
 
-    <update id="update" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillPaymentEntity">
-        UPDATE seckill_payment
+    <update id="update" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillRefundEntity">
+        UPDATE seckill_refund
         <set>
-            <if test="paymentNo != null and paymentNo != ''">
-                payment_no = #{paymentNo},
+            <if test="refundNo != null and refundNo != ''">
+                refund_no = #{refundNo},
             </if>
             <if test="orderId != null">
                 order_id = #{orderId},
@@ -251,29 +315,44 @@
             <if test="orderCode != null and orderCode != ''">
                 order_code = #{orderCode},
             </if>
+            <if test="paymentId != null">
+                payment_id = #{paymentId},
+            </if>
+            <if test="paymentNo != null and paymentNo != ''">
+                payment_no = #{paymentNo},
+            </if>
             <if test="userId != null">
                 user_id = #{userId},
             </if>
             <if test="userName != null and userName != ''">
                 user_name = #{userName},
             </if>
-            <if test="paymentAmount != null">
-                payment_amount = #{paymentAmount},
-            </if>
-            <if test="paymentMethod != null">
-                payment_method = #{paymentMethod},
-            </if>
-            <if test="paymentStatus != null">
-                payment_status = #{paymentStatus},
-            </if>
-            <if test="thirdPartyTransactionNo != null and thirdPartyTransactionNo != ''">
-                third_party_transaction_no = #{thirdPartyTransactionNo},
-            </if>
-            <if test="paymentTime != null">
-                payment_time = #{paymentTime},
-            </if>
             <if test="refundAmount != null">
                 refund_amount = #{refundAmount},
+            </if>
+            <if test="refundReason != null and refundReason != ''">
+                refund_reason = #{refundReason},
+            </if>
+            <if test="refundType != null">
+                refund_type = #{refundType},
+            </if>
+            <if test="refundStatus != null">
+                refund_status = #{refundStatus},
+            </if>
+            <if test="applyTime != null">
+                apply_time = #{applyTime},
+            </if>
+            <if test="auditTime != null">
+                audit_time = #{auditTime},
+            </if>
+            <if test="auditUserId != null">
+                audit_user_id = #{auditUserId},
+            </if>
+            <if test="auditUserName != null and auditUserName != ''">
+                audit_user_name = #{auditUserName},
+            </if>
+            <if test="auditRemark != null and auditRemark != ''">
+                audit_remark = #{auditRemark},
             </if>
             <if test="refundTime != null">
                 refund_time = #{refundTime},
@@ -297,4 +376,5 @@
         WHERE id = #{id}
         AND is_del = 0
     </update>
+
 </mapper>

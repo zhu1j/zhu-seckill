@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.net.zhu.seckill.business.mapper.seckill.SeckillUserMapper">
+
+    <resultMap type="cn.net.zhu.seckill.business.entity.user.SeckillUserEntity" id="SeckillUserResult">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="nickname" column="nickname"/>
+        <result property="avatar" column="avatar"/>
+        <result property="status" column="status"/>
+        <result property="registerTime" column="register_time"/>
+        <result property="lastLoginTime" column="last_login_time"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="createUserName" column="create_user_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateUserId" column="update_user_id"/>
+        <result property="updateUserName" column="update_user_name"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="isDel" column="is_del"/>
+    </resultMap>
+
+    <sql id="selectSeckillUserColumn">
+        id,
+        username,
+        password,
+        phone,
+        email,
+        nickname,
+        avatar,
+        status,
+        register_time,
+        last_login_time,
+        create_user_id,
+        create_user_name,
+        create_time,
+        update_user_id,
+        update_user_name,
+        update_time,
+        is_del
+    </sql>
+
+    <!-- 根据ID查询用户 -->
+    <select id="findById" parameterType="Long" resultMap="SeckillUserResult">
+        SELECT
+        <include refid="selectSeckillUserColumn"/>
+        FROM seckill_user
+        WHERE id = #{id} AND is_del = 0
+    </select>
+
+
+    <!-- 根据用户名查询用户 -->
+    <select id="findByUsername" parameterType="String" resultMap="SeckillUserResult">
+        SELECT
+        <include refid="selectSeckillUserColumn"/>
+        FROM seckill_user
+        WHERE username = #{username} AND is_del = 0
+    </select>
+
+    <!-- 根据手机号查询用户 -->
+    <select id="findByPhone" parameterType="String" resultMap="SeckillUserResult">
+        SELECT
+        <include refid="selectSeckillUserColumn"/>
+        FROM seckill_user
+        WHERE phone = #{phone} AND is_del = 0
+    </select>
+
+    <!-- 插入用户 -->
+    <insert id="insert" parameterType="cn.net.zhu.seckill.business.entity.user.SeckillUserEntity">
+        INSERT INTO seckill_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="username != null and username != ''">username,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="nickname != null and nickname != ''">nickname,</if>
+            <if test="avatar != null and avatar != ''">avatar,</if>
+            <if test="status != null">status,</if>
+            <if test="registerTime != null">register_time,</if>
+            <if test="lastLoginTime != null">last_login_time,</if>
+            <if test="createUserId != null">create_user_id,</if>
+            <if test="createUserName != null and createUserName != ''">create_user_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateUserId != null">update_user_id,</if>
+            <if test="updateUserName != null and updateUserName != ''">update_user_name,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="isDel != null">is_del,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="nickname != null and nickname != ''">#{nickname},</if>
+            <if test="avatar != null and avatar != ''">#{avatar},</if>
+            <if test="status != null">#{status},</if>
+            <if test="registerTime != null">#{registerTime},</if>
+            <if test="lastLoginTime != null">#{lastLoginTime},</if>
+            <if test="createUserId != null">#{createUserId},</if>
+            <if test="createUserName != null and createUserName != ''">#{createUserName},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateUserId != null">#{updateUserId},</if>
+            <if test="updateUserName != null and updateUserName != ''">#{updateUserName},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="isDel != null">#{isDel},</if>
+        </trim>
+    </insert>
+
+
+    <!-- 更新最后登录时间 -->
+    <update id="updateLastLoginTime">
+        UPDATE seckill_user
+        SET last_login_time = NOW()
+        WHERE id = #{id} AND is_del = 0
+    </update>
+
+
+</mapper>

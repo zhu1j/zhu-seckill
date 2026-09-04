@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.8.27第六次提交">
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillPaymentMapper.xml" afterDir="false" />
+    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.9.1第七次提交">
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillRefundLogMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillRefundMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/user/SeckillUserMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillPaymentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillPaymentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillPaymentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillPaymentMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +100,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\sql" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\resources\cn\net\zhu\seckill\business\mapper\user" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="configurationStatuses">
@@ -160,7 +166,8 @@
       <workItem from="1787558064774" duration="5329000" />
       <workItem from="1787728310105" duration="8867000" />
       <workItem from="1787796410199" duration="10351000" />
-      <workItem from="1788272436406" duration="5307000" />
+      <workItem from="1788272436406" duration="6342000" />
+      <workItem from="1788313067652" duration="3839000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <option name="closed" value="true" />
@@ -210,7 +217,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787844069389</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="2026.9.1第七次提交">
+      <option name="closed" value="true" />
+      <created>1788277795486</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1788277795486</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +238,7 @@
     <MESSAGE value="2026.8.24第四次提交" />
     <MESSAGE value="2026.8.26第五次提交" />
     <MESSAGE value="2026.8.27第六次提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="2026.8.27第六次提交" />
+    <MESSAGE value="2026.9.1第七次提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="2026.9.1第七次提交" />
   </component>
 </project>

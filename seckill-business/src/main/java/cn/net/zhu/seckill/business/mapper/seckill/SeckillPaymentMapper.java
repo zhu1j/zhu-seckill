@@ -30,7 +30,7 @@ public interface SeckillPaymentMapper {
     SeckillPaymentEntity findById(Long id);
 
     /**
-     * 根据订单编号查询支付记录集合
+     * 根据订单编号查询支付记录集合(降序展示)
      * @param orderCode 订单编号
      * @return 支付记录列表
      */
