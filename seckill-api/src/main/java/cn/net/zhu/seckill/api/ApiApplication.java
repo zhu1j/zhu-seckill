@@ -2,6 +2,7 @@ package cn.net.zhu.seckill.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * 秒杀系统 API服务启动类
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * "Run the code. Run the world."
  */
 
+@ComponentScan(basePackages = "cn.net.zhu.seckill")
 @SpringBootApplication
 public class ApiApplication {
     public static void main(String[] args) {
