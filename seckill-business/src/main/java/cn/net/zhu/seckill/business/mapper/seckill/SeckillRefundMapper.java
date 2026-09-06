@@ -34,7 +34,7 @@ public interface SeckillRefundMapper {
      * @param orderCode 订单编号
      * @return 秒杀退款记录实体
      */
-    SeckillRefundEntity findByOrderCode(String orderCode);
+    List<SeckillRefundEntity> findByOrderCode(String orderCode);
 
     /**
      * 根据订单id查询退款记录集合

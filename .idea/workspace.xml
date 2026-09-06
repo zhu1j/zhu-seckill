@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.9.6第十次提交：第八阶段：订单管理模块">
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/PaymentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/dto/CreatePaymentRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/SeckillPaymentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/SeckillPaymentServiceImpl.java" afterDir="false" />
+    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.9.6第十二次提交：第十阶段：退款管理模块">
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/RefundController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/SeckillRefundService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/SeckillRefundServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundLogEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundLogEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillRefundMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillRefundMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +170,7 @@
       <workItem from="1788313067652" duration="3839000" />
       <workItem from="1788480712536" duration="1228000" />
       <workItem from="1788505433284" duration="1220000" />
-      <workItem from="1788584411330" duration="18170000" />
+      <workItem from="1788584411330" duration="22985000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <option name="closed" value="true" />
@@ -259,7 +260,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788663924772</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="2026.9.6第十一次提交：第九阶段：支付管理模块">
+      <option name="closed" value="true" />
+      <created>1788664515630</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1788664515630</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,6 +286,8 @@
     <MESSAGE value="2026.9.6第九次提交：阶段五 用户认证模块\阶段六：商品搜索与展示模块" />
     <MESSAGE value="2026.9.6第九次提交：阶段七 秒杀业务核心模块" />
     <MESSAGE value="2026.9.6第十次提交：第八阶段：订单管理模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="2026.9.6第十次提交：第八阶段：订单管理模块" />
+    <MESSAGE value="2026.9.6第十一次提交：第九阶段：支付管理模块" />
+    <MESSAGE value="2026.9.6第十二次提交：第十阶段：退款管理模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="2026.9.6第十二次提交：第十阶段：退款管理模块" />
   </component>
 </project>
