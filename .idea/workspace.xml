@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.9.4第八次提交">
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/ProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/RegisterController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/helper/UserTokenHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/UserServiceImpl.java" afterDir="false" />
+    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.9.6第九次提交：阶段五 用户认证模块\阶段六：商品搜索与展示模块">
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/user/SeckillUserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/OrderTimeoutService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/UserSeckillProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/UserSeckillProductServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/ApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/ApiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/filter/JwtTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/filter/JwtTokenFilter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +20,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -176,7 +169,7 @@
       <workItem from="1788313067652" duration="3839000" />
       <workItem from="1788480712536" duration="1228000" />
       <workItem from="1788505433284" duration="1220000" />
-      <workItem from="1788584411330" duration="15764000" />
+      <workItem from="1788584411330" duration="16739000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <option name="closed" value="true" />
@@ -242,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788480737207</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="2026.9.6第九次提交：阶段五 用户认证模块\阶段六：商品搜索与展示模块">
+      <option name="closed" value="true" />
+      <created>1788662113713</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1788662113713</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +258,7 @@
     <MESSAGE value="2026.8.27第六次提交" />
     <MESSAGE value="2026.9.1第七次提交" />
     <MESSAGE value="2026.9.4第八次提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="2026.9.4第八次提交" />
+    <MESSAGE value="2026.9.6第九次提交：阶段五 用户认证模块\阶段六：商品搜索与展示模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="2026.9.6第九次提交：阶段五 用户认证模块\阶段六：商品搜索与展示模块" />
   </component>
 </project>
