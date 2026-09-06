@@ -290,7 +290,7 @@ public class UserSeckillProductServiceImpl implements UserSeckillProductService 
         setSeckillProcessStatus(seckillProductId, userName, 2, 50, "正在创建订单...");
 
         // 从ES读取商品基础信息
-        ESSeckillProductEntity esProduct = productService.getProductFromES(seckillProductId);
+        EsSeckillProductEntity esProduct = productService.getProductFromES(seckillProductId);
         if (esProduct == null) {
             throw new BusinessException("商品信息不存在");
         }

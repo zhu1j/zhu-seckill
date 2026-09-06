@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>商品列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/element-ui/index.css}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style type="text/css">
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        background: #f8f9fa;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        line-height: 1.6;
+        color: #212529;
+        font-size: 14px;
+      }
+      
+      /* 页面容器 */
+      .page-container {
+        min-height: 100vh;
+        background: #f8f9fa;
+        padding: 20px 0;
+      }
+      
+      .main-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      
+      /* 页面头部 */
+      .page-header {
+        background: white;
+        border-radius: 8px;
+        padding: 24px 32px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        border: 1px solid #e9ecef;
+      }
+      
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: #6c757d;
+      }
+      
+      .breadcrumb a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+      .page-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #212529;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      
+      .page-title i {
+        color: #007bff;
+      }
+      
+      /* 页面头部布局 */
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+      }
+      
+      .header-left {
+        flex: 1;
+      }
+      
+      .header-right {
+        flex-shrink: 0;
+        margin-left: 20px;
+      }
+      
+      /* 用户菜单样式 */
+      .user-menu {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        color: #495057;
+        user-select: none;
+      }
+      
+      .user-menu:hover {
+        background: #e9ecef;
+        border-color: #007bff;
+        color: #007bff;
+      }
+      
+      .user-menu i.fas.fa-user {
+        color: #007bff;
+        font-size: 16px;
+      }
+      
+      .user-menu i.fas.fa-chevron-down {
+        font-size: 12px;
+        transition: transform 0.3s ease;
+      }
+      
+      .user-menu i.fas.fa-chevron-down.rotate {
+        transform: rotate(180deg);
+      }
+      
+      /* 下拉菜单样式 */
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        min-width: 160px;
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 1000;
+        margin-top: 4px;
+        overflow: hidden;
+      }
+      
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        color: #495057;
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid #f8f9fa;
+      }
+      
+      .dropdown-item:last-child {
+        border-bottom: none;
+      }
+      
+      .dropdown-item:hover {
+        background: #f8f9fa;
+        color: #007bff;
+      }
+      
+      .dropdown-item i {
+        color: #6c757d;
+        font-size: 14px;
+      }
+      
+      .dropdown-item:hover i {
+         color: #007bff;
+       }
+       
+       /* 查询条件区域样式 */
+       .search-section {
+         background: white;
+         border: 1px solid #e9ecef;
+         border-radius: 8px;
+         margin: 20px 0;
+         padding: 20px;
+         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+       }
+       
+       .search-form {
+         width: 100%;
+       }
+       
+       .search-item {
+         display: flex;
+         align-items: center;
+         margin-bottom: 16px;
+       }
+       
+       .search-label {
+         min-width: 80px;
+         font-size: 14px;
+         color: #495057;
+         font-weight: 500;
+         margin-right: 8px;
+         text-align: right;
+       }
+       
+       .search-item .el-input,
+       .search-item .el-select,
+       .search-item .el-date-editor {
+         flex: 1;
+       }
+       
+       .search-buttons {
+         display: flex;
+         gap: 12px;
+         justify-content: flex-start;
+         align-items: center;
+         height: 32px;
+       }
+       
+       .search-buttons .el-button {
+         display: flex;
+         align-items: center;
+         gap: 6px;
+       }
+       
+       .search-buttons .el-button i {
+         font-size: 12px;
+       }
+       
+       /* Element UI 组件样式调整 */
+       .search-section .el-input__inner,
+       .search-section .el-select .el-input__inner {
+         border-radius: 6px;
+         border: 1px solid #dcdfe6;
+         transition: all 0.3s ease;
+       }
+       
+       .search-section .el-input__inner:focus,
+       .search-section .el-select .el-input__inner:focus {
+         border-color: #007bff;
+         box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+       }
+       
+       .search-section .el-button--primary {
+         background-color: #007bff;
+         border-color: #007bff;
+       }
+       
+       .search-section .el-button--primary:hover {
+         background-color: #0056b3;
+         border-color: #0056b3;
+       }
+       
+       /* 时间范围选择器样式优化 */
+       .search-section .el-date-editor {
+         width: 100% !important;
+       }
+       
+       .search-section .el-date-editor .el-range-separator {
+         width: 20px !important;
+         text-align: center !important;
+         padding: 0 2px !important;
+         font-size: 12px !important;
+         color: #606266 !important;
+         display: inline-block !important;
+         overflow: visible !important;
+         white-space: nowrap !important;
+       }
+       
+       .search-section .el-date-editor .el-range-input {
+         width: calc(50% - 15px) !important;
+       }
+      .content-wrap {
+        background-size: 100% 100%;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        padding-top: 20px;
+      }
+      .table-wrap {
+        padding: 20px;
+      }
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      
+      /* 优化分页样式 */
+      .el-pagination {
+        padding: 20px 0;
+      }
+      
+      .el-pagination .el-pager li {
+        background-color: #fff;
+        border: 1px solid #dcdfe6;
+        border-radius: 4px;
+        margin: 0 2px;
+        transition: all 0.3s ease;
+      }
+      
+      .el-pagination .el-pager li:hover {
+        color: #409eff;
+        border-color: #409eff;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(64, 158, 255, 0.2);
+      }
+      
+      .el-pagination .el-pager li.active {
+        background-color: #409eff;
+        border-color: #409eff;
+        color: #fff;
+        font-weight: 600;
+      }
+      
+      .el-pagination .btn-prev,
+      .el-pagination .btn-next {
+        background-color: #fff;
+        border: 1px solid #dcdfe6;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+      
+      .el-pagination .btn-prev:hover,
+      .el-pagination .btn-next:hover {
+        color: #409eff;
+        border-color: #409eff;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(64, 158, 255, 0.2);
+      }
+      
+      .el-pagination .el-select .el-input {
+        width: 100px;
+      }
+      
+      .el-pagination .el-select .el-input__inner {
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+      
+      .el-pagination .el-select .el-input__inner:hover {
+        border-color: #409eff;
+      }
+
+      .page-wrap {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        border: 1px solid #e9ecef;
+        padding: 20px;
+      }
+      .container {
+        max-width: 100%;
+        margin: 0;
+      }
+      .product-card {
+        margin-top: 15px;
+        background-color: #fff;
+        padding: 10px 20px 20px 10px;
+        cursor: pointer;
+        height: 300px;
+      }
+      .card-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .top-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 5px;
+      }
+      .image-container {
+        flex-shrink: 0;
+      }
+      .status-container {
+        flex-shrink: 0;
+        margin-left: 10px;
+      }
+      .bottom-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .product-img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+      }
+      .product-name {
+        font-size: 14px;
+        margin-top: 10px;
+      }
+      .product-model {
+        font-size: 12px;
+        margin-top: 10px;
+        color: #666;
+      }
+      .price-row {
+        margin-top: 10px;
+        margin-top: 10px;
+      }
+      .price-row .price {
+        color: #fa5400;
+        font-size: 16px;
+        white-space: nowrap;
+      }
+      .price-row .costPrice {
+        color: #999;
+        font-size: 13px;
+        white-space: nowrap;
+        text-decoration: line-through;
+      }
+      .with-hold-quantity {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #666;
+      }
+      .seckill-time {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #666;
+      }
+      .seckill-time .start-time {
+        color: #666;
+        margin-bottom: 5px;
+      }
+      .seckill-time .end-time {
+        color: #666;
+      }
+      .seckill-status {
+        font-size: 12px;
+        font-weight: bold;
+      }
+      .status-not-started {
+        color: #909399;
+      }
+      .status-ongoing {
+        color: #67c23a;
+      }
+      .status-ended {
+        color: #f56c6c;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript" th:src="@{/axios/axios.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/vue.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/jsencrypt.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/js.cookie.min.js}"></script>
+    <script type="text/javascript" th:src="@{/element-ui/index.js}"></script>
+    <script type="text/javascript" th:src="@{/js/login-check.js}"></script>
+    <div id="app">
+      <div class="page-container">
+        <div class="main-wrapper">
+          <!-- 页面头部 -->
+          <div class="page-header">
+            <div class="header-content">
+              <div class="header-left">
+                <div class="breadcrumb">
+                  <i class="fas fa-home"></i>
+                  <span>首页</span>
+                </div>
+                <h1 class="page-title">
+                  <i class="fas fa-shopping-cart"></i>
+                  秒杀商品列表
+                </h1>
+              </div>
+              <div class="header-right">
+                <div class="user-menu" @click="toggleUserMenu">
+                  <i class="fas fa-user"></i>
+                  <span>我的</span>
+                  <i class="fas fa-chevron-down" :class="{ 'rotate': showUserMenu }"></i>
+                  <div class="dropdown-menu" v-show="showUserMenu">
+                    <a href="/order/list" class="dropdown-item">
+                      <i class="fas fa-shopping-bag"></i>
+                      我的订单
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            
+            <!-- 查询条件区域 -->
+            <div class="search-section">
+              <div class="search-form">
+                <el-row :gutter="20">
+                  <el-col :span="6">
+                    <div class="search-item">
+                      <label class="search-label">商品名称：</label>
+                      <el-input
+                        v-model="searchParams.name"
+                        placeholder="请输入商品名称"
+                        clearable
+                        size="small">
+                      </el-input>
+                    </div>
+                  </el-col>
+                  <el-col :span="5">
+                    <div class="search-item">
+                      <label class="search-label">秒杀状态：</label>
+                      <el-select
+                        v-model="searchParams.seckillStatus"
+                        placeholder="请选择状态"
+                        clearable
+                        size="small">
+                        <el-option label="全部" value=""></el-option>
+                        <el-option label="未开始" value="0"></el-option>
+                        <el-option label="进行中" value="1"></el-option>
+                        <el-option label="已结束" value="2"></el-option>
+                      </el-select>
+                    </div>
+                  </el-col>
+                  <el-col :span="8">
+                    <div class="search-item">
+                      <label class="search-label">时间范围：</label>
+                      <el-date-picker
+                        v-model="searchParams.timeRange"
+                        type="datetimerange"
+                        range-separator="至"
+                        start-placeholder="开始时间"
+                        end-placeholder="结束时间"
+                        size="small"
+                        format="yyyy-MM-dd HH:mm"
+                        value-format="timestamp">
+                      </el-date-picker>
+                    </div>
+                  </el-col>
+                  <el-col :span="5">
+                    <div class="search-buttons">
+                      <el-button type="primary" size="small" @click="handleSearch">
+                        <i class="fas fa-search"></i>
+                        查询
+                      </el-button>
+                      <el-button size="small" @click="handleReset">
+                        <i class="fas fa-redo"></i>
+                        重置
+                      </el-button>
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+            </div>
+            
+            <!-- 商品列表内容 -->
+            <div class="page-wrap">
+              <div class="container">
+                <el-row :gutter="20">
+              <el-col :span="5" v-for="(item, index) in rows" :key="index">
+                <div class="product-card" @click="onDetail(item)">
+                  <div class="card-content">
+                    <div class="top-section">
+                      <div class="image-container">
+                        <img
+                          class="product-img"
+                          :src="item.cover"
+                          min-width="100"
+                          height="100"
+                        />
+                      </div>
+                      <div class="status-container">
+                        <div class="seckill-status">
+                          <span :class="getStatusClass(item)">{{getStatusText(item)}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bottom-section">
+                      <div class="product-name">{{item.name}}</div>
+                      <div class="product-model">{{item.model}}</div>
+                      <div class="price-row">
+                        <span class="price">{{item.price}}</span>
+                        <span class="costPrice">{{item.costPrice}}</span>
+                      </div>
+                      <div class="with-hold-quantity">
+                        库存：{{item.withHoldQuantity}}
+                      </div>
+                      <div class="seckill-time">
+                        <div class="start-time">开始时间：{{formatTime(item.startTime)}}</div>
+                        <div class="end-time">结束时间：{{formatTime(item.endTime)}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="pagination">
+            <el-pagination
+              :current-page.sync="page.pageNo"
+              :page-sizes="[10, 20, 50, 100]"
+              :page-size="page.pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="page.total"
+              class="pagination"
+              @size-change="sizeChange"
+              @current-change="pageChange"
+              :pager-count="7"
+              :hide-on-single-page="false"
+              background
+            />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      data: function () {
+        return {
+          rows: [],
+          page: {
+            total: 0, // 总页数
+            pageNo: 1, // 当前页数
+            pageSize: 10, // 每页显示多少条
+          },
+          showUserMenu: false, // 控制用户菜单显示状态
+          searchParams: {
+            name: '', // 商品名称
+            seckillStatus: null, // 秒杀状态
+            timeRange: null // 时间范围
+          }
+        };
+      },
+      mounted() {
+        this.getPage(this.page);
+        // 点击页面其他地方关闭用户菜单
+        document.addEventListener('click', this.handleClickOutside);
+      },
+      beforeDestroy() {
+        // 组件销毁前移除事件监听器
+        document.removeEventListener('click', this.handleClickOutside);
+      },
+      methods: {
+        onDetail(row) {
+          window.location.href="/product/detail?id="+ row.id;
+        },
+        sizeChange(val) {
+          this.page.pageNo = 1;
+          this.page.pageSize = val;
+          this.getPage(this.page);
+        },
+        pageChange(val) {
+          this.page.pageNo = val;
+          // this.page.pageSize = val
+          this.getPage(this.page);
+        },
+        getPage(page) {
+           const self = this; // 保存this引用
+           
+           // 构建查询参数
+           const queryParams = {
+             ...page,
+             name: this.searchParams.name,
+             seckillStatus: this.searchParams.seckillStatus
+           };
+           
+           // 处理时间范围参数
+           if (this.searchParams.timeRange && this.searchParams.timeRange.length === 2) {
+             // 将时间转换为时间戳（毫秒），ES索引中时间字段为long类型
+             queryParams.queryStartTime = new Date(this.searchParams.timeRange[0]).getTime();
+             queryParams.queryEndTime = new Date(this.searchParams.timeRange[1]).getTime();
+           }
+           
+           axios.post("/searchProductList", queryParams, { headers: this.getHeaders()})
+           .then((res) => {
+              // 检查业务层面的错误码
+               if (res.data && res.data.code === 403) {
+                 // 处理登录相关错误
+                 const message = res.data.message || '您的登录状态已过期，为了保护您的账户安全，请重新登录后继续购物';
+                 LoginChecker.showLoginDialog(message, function() {
+                   window.location.href = '/login';
+                 });
+                 return;
+               }
+              
+              // 正常处理数据
+              this.rows = res.data.data;
+              this.page.total = res.data.totalCount || 0;
+          }).catch(error => {
+            // 使用统一的登录检查工具处理网络错误
+            const handled = LoginChecker.handleApiError(error, function() {
+              window.location.href = '/login';
+            });
+            
+            // 如果不是登录错误，显示其他错误信息
+            if (!handled) {
+              if (error.response && error.response.data) {
+                self.$message.error(error.response.data.message || '请求失败');
+              } else {
+                self.$message.error(error.message || '网络错误，请稍后重试');
+              }
+            }
+        });
+        },
+        getHeaders() {
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic@' + Cookies.get('ZHU-TOKEN')
+            }
+            return headers;
+        },
+        formatTime(timestamp) {
+            if (!timestamp) return '';
+            // 将字符串时间戳转换为数字
+            const numericTimestamp = typeof timestamp === 'string' ? parseInt(timestamp) : timestamp;
+            const date = new Date(numericTimestamp);
+            
+            // 检查日期是否有效
+            if (isNaN(date.getTime())) {
+                return 'Invalid Date';
+            }
+            
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            return `${year}-${month}-${day} ${hours}:${minutes}`;
+        },
+        getStatusText(item) {
+            const now = new Date().getTime();
+            // 将字符串时间戳转换为数字
+            const startTime = typeof item.startTime === 'string' ? parseInt(item.startTime) : item.startTime;
+            const endTime = typeof item.endTime === 'string' ? parseInt(item.endTime) : item.endTime;
+            
+            if (now < startTime) {
+                return '未开始';
+            } else if (now >= startTime && now <= endTime) {
+                return '进行中';
+            } else {
+                return '已结束';
+            }
+        },
+        getStatusClass(item) {
+            const now = new Date().getTime();
+            // 将字符串时间戳转换为数字
+            const startTime = typeof item.startTime === 'string' ? parseInt(item.startTime) : item.startTime;
+            const endTime = typeof item.endTime === 'string' ? parseInt(item.endTime) : item.endTime;
+            
+            if (now < startTime) {
+                return 'status-not-started';
+            } else if (now >= startTime && now <= endTime) {
+                return 'status-ongoing';
+            } else {
+                return 'status-ended';
+            }
+        },
+        // 用户菜单相关方法
+        toggleUserMenu() {
+            this.showUserMenu = !this.showUserMenu;
+        },
+        handleClickOutside(event) {
+             // 检查点击是否在用户菜单外部
+             const userMenu = event.target.closest('.user-menu');
+             if (!userMenu) {
+                 this.showUserMenu = false;
+             }
+         },
+         // 查询功能相关方法
+         handleSearch() {
+             // 重置到第一页
+             this.page.pageNo = 1;
+             // 执行查询
+             this.getPage(this.page);
+         },
+         handleReset() {
+             // 重置查询条件
+             this.searchParams = {
+                 name: '',
+                 seckillStatus: null,
+                 timeRange: null
+             };
+             // 重置到第一页
+             this.page.pageNo = 1;
+             // 执行查询
+             this.getPage(this.page);
+         }
+      },
+    });
+  </script>
+</html>

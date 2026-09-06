@@ -1,7 +1,6 @@
 package cn.net.zhu.seckill.business.entity.seckill;
 
 import cn.net.zhu.seckill.business.entity.EsBaseEntity;
-import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,7 +18,7 @@ import java.util.Date;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ESSeckillProductEntity extends EsBaseEntity {
+public class EsSeckillProductEntity extends EsBaseEntity {
     private String name; //商品名称
     private String brandName; //品牌名称
     private String model; //商品型号

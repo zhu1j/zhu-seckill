@@ -2,7 +2,7 @@ package cn.net.zhu.seckill.business.service;
 
 import cn.net.zhu.seckill.business.entity.ResponsePageEntity;
 import cn.net.zhu.seckill.business.entity.product.ESSeckillProductConditionEntity;
-import cn.net.zhu.seckill.business.entity.seckill.ESSeckillProductEntity;
+import cn.net.zhu.seckill.business.entity.seckill.EsSeckillProductEntity;
 import cn.net.zhu.seckill.business.entity.seckill.SeckillProductDetailPageEntity;
 
 /**
@@ -16,7 +16,7 @@ public interface ProductService {
      * @param condition 查询条件实体：关键词、价格区间、分页参数等
      * @return ResponsePageEntity<ESSeckillProductEntity> 分页结果，ES查询出来的秒杀商品数据
      */
-    ResponsePageEntity<ESSeckillProductEntity> searchProductList(
+    ResponsePageEntity<EsSeckillProductEntity> searchProductList(
             ESSeckillProductConditionEntity condition);
 
     /**
@@ -45,7 +45,7 @@ public interface ProductService {
      * @param id 商品id
      * @return ESSeckillProductEntity ES存储的商品原始对象
      */
-    ESSeckillProductEntity getProductFromES(Long id);
+    EsSeckillProductEntity getProductFromES(Long id);
 }
 
 /*

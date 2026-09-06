@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>订单支付</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/element-ui/index.css}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style type="text/css">
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        background: #f8f9fa;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        line-height: 1.6;
+        color: #212529;
+        font-size: 14px;
+      }
+      
+      /* 页面容器 */
+      .page-container {
+        min-height: 100vh;
+        background: #f8f9fa;
+        padding: 20px 0;
+      }
+      
+      .main-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      
+      /* 页面头部 */
+      .page-header {
+        background: white;
+        border-radius: 8px;
+        padding: 24px 32px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        border: 1px solid #e9ecef;
+      }
+      
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: #6c757d;
+      }
+      
+      .breadcrumb a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+      .page-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #212529;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      
+      .page-title i {
+        color: #007bff;
+      }
+      
+      /* 主要内容区域 */
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+      
+      /* 订单信息卡片 */
+      .order-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .order-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      }
+      
+      .card-header {
+        background: #fff;
+        padding: 24px 32px;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .card-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #212529;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .card-title i {
+        color: #007bff;
+      }
+      
+      /* 商品信息区域 */
+      .product-section {
+        padding: 32px;
+      }
+      
+      .product-display {
+        display: flex;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      
+      .product-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 1px solid #e9ecef;
+        flex-shrink: 0;
+      }
+      
+      .product-details {
+        flex: 1;
+      }
+      
+      .product-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: #212529;
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+      
+      .product-model {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 12px;
+      }
+      
+      .product-specs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+      
+      .spec-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #f8f9fa;
+        font-size: 14px;
+      }
+      
+      .spec-label {
+        color: #6c757d;
+        font-weight: 500;
+      }
+      
+      .spec-value {
+        color: #212529;
+        font-weight: 600;
+      }
+      
+      /* 支付方式卡片 */
+      .payment-methods-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        margin-top: 24px;
+      }
+      
+      .payment-methods-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      }
+      
+      .payment-methods-header {
+        background: #28a745;
+        color: white;
+        padding: 16px 20px;
+        font-weight: 600;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .payment-methods-content {
+        padding: 24px;
+      }
+      
+      .payment-methods {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .method-item {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #fff;
+      }
+      
+      .method-item:hover {
+        border-color: #007bff;
+        background: #f8f9ff;
+      }
+      
+      .method-item.selected {
+        border-color: #007bff;
+        background: #f8f9ff;
+        box-shadow: 0 2px 8px rgba(0,123,255,0.15);
+      }
+      
+      .method-icon {
+        width: 48px;
+        height: 48px;
+        margin-right: 16px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      
+      .method-content {
+        flex: 1;
+      }
+      
+      .method-name {
+        font-size: 16px;
+        color: #212529;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      
+      .method-desc {
+        font-size: 12px;
+        color: #6c757d;
+      }
+      
+      .method-indicator {
+        margin-left: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+      }
+      
+      .method-indicator i {
+        color: #007bff;
+        font-size: 20px;
+        transition: all 0.3s ease;
+      }
+      
+      .method-item.selected .method-indicator i {
+        color: #007bff;
+        transform: scale(1.1);
+      }
+      
+      /* 侧边栏 */
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      
+      /* 支付金额卡片 */
+      .payment-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .payment-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      }
+      
+      .payment-header {
+        background: #007bff;
+        color: white;
+        padding: 16px 20px;
+        font-weight: 600;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .payment-content {
+        padding: 20px;
+      }
+      
+      .payment-amount {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      
+      .amount-label {
+        color: #6c757d;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      
+      .amount-value {
+        font-size: 28px;
+        font-weight: 700;
+        color: #dc3545;
+      }
+      
+      /* 操作按钮区域 */
+      .payment-actions {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 24px;
+      }
+      
+      .action-button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-width: 140px;
+      }
+      
+      .pay-button {
+        background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+        color: white;
+      }
+      
+      .pay-button:hover {
+        background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+      }
+      
+      .pay-button:disabled {
+        background: #6c757d;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+      
+      .back-button {
+        background: #fff;
+        color: #007bff;
+        border: 2px solid #007bff;
+      }
+      
+      .back-button:hover {
+        background: #007bff;
+        color: #fff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+      }
+      
+      .security-note {
+        margin-top: 12px;
+        padding: 8px 12px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #6c757d;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      
+      /* 加载遮罩 */
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        backdrop-filter: blur(4px);
+      }
+      
+      .loading-content {
+        background: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        max-width: 300px;
+      }
+      
+      .loading-spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #007bff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 16px;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        font-size: 16px;
+        color: #6c757d;
+        margin-top: 16px;
+      }
+      
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .main-wrapper {
+          padding: 0 16px;
+        }
+        
+        .content-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+        
+        .page-header {
+          padding: 16px 20px;
+        }
+        
+        .page-title {
+          font-size: 24px;
+        }
+        
+        .product-section {
+          padding: 20px;
+        }
+        
+        .product-display {
+          flex-direction: column;
+          gap: 16px;
+        }
+        
+        .product-image {
+          width: 100%;
+          height: 200px;
+        }
+        
+        .card-header {
+          padding: 16px 20px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+        
+        .payment-actions {
+          flex-direction: column;
+        }
+        
+        .action-button {
+          width: 100%;
+        }
+      }
+      
+      /* 动画效果 */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .order-card, .payment-card, .payment-methods-card {
+        animation: fadeIn 0.6s ease-out;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript" th:src="@{/axios/axios.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/vue.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/jsencrypt.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/js.cookie.min.js}"></script>
+    <script type="text/javascript" th:src="@{/element-ui/index.js}"></script>
+    
+    <div id="app">
+      <div class="page-container">
+        <div class="main-wrapper">
+          <!-- 页面头部 -->
+          <div class="page-header">
+            <div class="breadcrumb">
+              <a href="javascript:void(0)" @click="goHome">
+                <i class="fas fa-home"></i> 首页
+              </a>
+              <span>/</span>
+              <a href="javascript:void(0)" @click="goBack">订单详情</a>
+              <span>/</span>
+              <span>订单支付</span>
+            </div>
+            <h1 class="page-title">
+              <i class="fas fa-credit-card"></i>
+              订单支付
+            </h1>
+          </div>
+
+          <!-- 主要内容区域 -->
+          <div class="content-grid">
+            <!-- 左侧：订单信息 -->
+            <div class="order-card">
+              <div class="card-header">
+                <div class="card-title">
+                  <i class="fas fa-shopping-cart"></i>
+                  订单信息
+                </div>
+              </div>
+              
+              <div class="product-section">
+                <div class="product-display">
+                  <img class="product-image" th:src="${orderDetail.cover}" alt="商品图片" />
+                  <div class="product-details">
+                    <div class="product-name" th:text="${orderDetail.productName}">商品名称</div>
+                    <div class="product-model" th:text="${orderDetail.model}">商品规格</div>
+                    
+                    <div class="product-specs">
+                      <div class="spec-item">
+                        <span class="spec-label">订单金额</span>
+                        <span class="spec-value">¥<span th:text="${orderDetail.totalAmount}">0.00</span></span>
+                      </div>
+                      <div class="spec-item">
+                        <span class="spec-label">购买数量</span>
+                        <span class="spec-value"><span th:text="${orderDetail.quantity}">1</span></span>
+                      </div>
+                      <div class="spec-item">
+                        <span class="spec-label">订单编号</span>
+                        <span class="spec-value"><span th:text="${orderDetail.id}">订单编号</span></span>
+                      </div>
+                      <div class="spec-item">
+                        <span class="spec-label">账号名称</span>
+                        <span class="spec-value"><span th:text="${orderDetail.userName}">账号名称</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 右侧：支付信息 -->
+            <div class="sidebar">
+              <!-- 支付金额卡片 -->
+              <div class="payment-card">
+                <div class="payment-header">
+                  <i class="fas fa-calculator"></i>
+                  支付金额
+                </div>
+                <div class="payment-content">
+                  <div class="payment-amount">
+                    <div class="amount-label">应付总额</div>
+                    <div class="amount-value">¥<span th:text="${orderDetail.paymentAmount}">0.00</span></div>
+                  </div>
+                  <div class="security-note">
+                    <i class="fas fa-shield-alt"></i>
+                    支付安全由银联保障
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 支付方式选择卡片 -->
+          <div class="payment-methods-card">
+            <div class="payment-methods-header">
+              <i class="fas fa-wallet"></i>
+              选择支付方式
+            </div>
+            
+            <div class="payment-methods-content">
+              <div class="payment-methods">
+                <div class="method-item" :class="{selected: selectedMethod === 'alipay'}" @click="selectMethod('alipay')">
+                  <div class="method-icon" style="background: linear-gradient(135deg, #1677ff 0%, #0d5bdd 100%);">
+                    <i class="fab fa-alipay" style="color: #fff; font-size: 24px;"></i>
+                  </div>
+                  <div class="method-content">
+                    <div class="method-name">支付宝</div>
+                    <div class="method-desc">安全快捷的在线支付</div>
+                  </div>
+                  <div class="method-indicator">
+                    <i class="fas fa-check-circle" v-if="selectedMethod === 'alipay'"></i>
+                  </div>
+                </div>
+                
+                <div class="method-item" :class="{selected: selectedMethod === 'wechat'}" @click="selectMethod('wechat')">
+                  <div class="method-icon" style="background: linear-gradient(135deg, #07c160 0%, #05a050 100%);">
+                    <i class="fab fa-weixin" style="color: #fff; font-size: 24px;"></i>
+                  </div>
+                  <div class="method-content">
+                    <div class="method-name">微信支付</div>
+                    <div class="method-desc">微信安全支付</div>
+                  </div>
+                  <div class="method-indicator">
+                    <i class="fas fa-check-circle" v-if="selectedMethod === 'wechat'"></i>
+                  </div>
+                </div>
+                
+                <div class="method-item" :class="{selected: selectedMethod === 'bankcard'}" @click="selectMethod('bankcard')">
+                  <div class="method-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);">
+                    <i class="fas fa-credit-card" style="color: #fff; font-size: 20px;"></i>
+                  </div>
+                  <div class="method-content">
+                    <div class="method-name">银行卡支付</div>
+                    <div class="method-desc">支持各大银行储蓄卡和信用卡</div>
+                  </div>
+                  <div class="method-indicator">
+                    <i class="fas fa-check-circle" v-if="selectedMethod === 'bankcard'"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 支付操作按钮 -->
+              <div class="payment-actions">
+                <button class="action-button back-button" @click="goBack">
+                  <i class="fas fa-arrow-left"></i>
+                  返回订单
+                </button>
+                <button class="action-button pay-button" @click="submitPayment" :disabled="paymentLoading">
+                  <i class="fas fa-lock" v-if="!paymentLoading"></i>
+                  <i class="fas fa-spinner fa-spin" v-if="paymentLoading"></i>
+                  {{ paymentLoading ? '支付中...' : '立即支付' }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 支付加载遮罩 -->
+      <div class="loading-overlay" v-if="paymentLoading">
+        <div class="loading-content">
+          <div class="loading-spinner"></div>
+          <div style="font-size: 18px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px;">
+            正在处理支付
+          </div>
+          <div class="loading-text">请稍候，不要关闭页面...</div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+  <script th:inline="javascript" type="text/javascript">
+    new Vue({
+      el: "#app",
+      data: function () {
+        return {
+          selectedMethod: 'alipay', // 默认选择支付宝
+          paymentLoading: false,
+          orderDetail: /*[[${orderDetail}]]*/ {},
+        };
+      },
+      methods: {
+        selectMethod(method) {
+          this.selectedMethod = method;
+        },
+        
+        goHome() {
+          window.location.href = "/";
+        },
+        
+        goBack() {
+          const orderCode = this.orderDetail.code;
+            if (orderCode && orderCode.toString().length > 0) {
+                window.location.href = "/order/detail?orderCode=" + orderCode;
+          } else {
+            window.location.href = "/order/list";
+          }
+        },
+        
+        async submitPayment() {
+          if (!this.selectedMethod) {
+            this.$message.warning('请选择支付方式');
+            return;
+          }
+          
+          this.paymentLoading = true;
+          
+          try {
+            // 将字符串标识转换为数字，以兼容后端接口
+            let paymentMethodCode;
+            switch(this.selectedMethod) {
+              case 'alipay':
+                paymentMethodCode = 1;
+                break;
+              case 'wechat':
+                paymentMethodCode = 2;
+                break;
+              case 'bankcard':
+                paymentMethodCode = 3;
+                break;
+              default:
+                paymentMethodCode = 1;
+            }
+            
+            // 1. 创建支付记录
+            const createResponse = await axios.post('/seckill/payment/create', {
+              orderCode: this.orderDetail.code,
+              paymentMethod: paymentMethodCode
+            }, {
+              headers: this.getHeaders()
+            });
+            
+            // 直接获取返回的支付数据，不再检查success字段
+            const paymentData = createResponse.data;
+            
+            // 2. 处理支付
+            const processResponse = await axios.post('/seckill/payment/process', {
+              paymentId: paymentData.id,
+              thirdPartyTransactionNo: this.generateTransactionNo()
+            }, {
+              headers: this.getHeaders()
+            });
+            
+            // 直接检查返回的布尔值
+            if (processResponse.data) {
+              this.$message.success('支付成功！');
+              setTimeout(() => {
+                window.location.href = "/order/detail?orderCode=" + this.orderDetail.orderNo;
+              }, 1500);
+            } else {
+              throw new Error('支付处理失败');
+            }
+            
+          } catch (error) {
+            console.error('支付失败:', error);
+            this.$message.error(error.message || '支付失败，请重试');
+          } finally {
+            this.paymentLoading = false;
+          }
+        },
+        
+        generateTransactionNo() {
+          // 生成模拟的第三方交易流水号
+          const timestamp = Date.now();
+          const random = Math.floor(Math.random() * 10000);
+          return `TXN${timestamp}${random}`;
+        },
+        
+        getHeaders() {
+          const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic@' + Cookies.get('ZHU-TOKEN')
+          };
+          return headers;
+        }
+      }
+    });
+  </script>
+</html>

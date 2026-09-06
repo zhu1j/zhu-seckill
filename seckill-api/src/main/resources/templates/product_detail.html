@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>商品详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/element-ui/index.css}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style type="text/css">
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        background: #f8f9fa;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        line-height: 1.6;
+        color: #212529;
+        font-size: 14px;
+      }
+      
+      .page-wrap {
+        min-height: 100vh;
+        width: 100vw;
+        background: #f8f9fa;
+        padding: 20px 0;
+      }
+      
+      .container {
+        width: 1200px;
+        margin: 0 auto;
+      }
+      
+      /* 页面头部 */
+      .page-header {
+        background: white;
+        border-radius: 8px;
+        padding: 24px 32px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        border: 1px solid #e9ecef;
+      }
+      
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: #6c757d;
+      }
+      
+      .breadcrumb a {
+        color: #007bff;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+      .page-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #212529;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      
+      .page-title i {
+        color: #007bff;
+      }
+      .row {
+        display: flex;
+        margin-top: 40px;
+      }
+      .item {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .img-wrap {
+        width: 300px;
+        margin-right: 40px;
+        margin-left: 10px;
+        position: relative;
+      }
+      .img-wrap img {
+        width: 300px;
+        object-fit: contain;
+        width: 300px;
+        height: 300px;
+        margin-bottom: 20px;
+        border: 1px solid #e8e8e8;
+      }
+      .product-name {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 25px;
+        margin-bottom: 20px;
+      }
+      .item-label {
+        color: #999;
+        font-size: 13px;
+      }
+      .item-value {
+        font-size: 13px;
+      }
+      .detail-value {
+        margin-top: 20px;
+      }
+      .costPrice {
+        color: #999;
+        font-size: 13px;
+        white-space: nowrap;
+        text-decoration: line-through;
+      }
+      .timer {
+        color: #fa5400;
+        margin-right: 5px;
+      }
+      .price {
+        color: #fa5400;
+        white-space: nowrap;
+        font-size: 28px;
+      }
+      .price-wrap {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .ml20 {
+        margin-left: 20px;
+      }
+      .status-not-started {
+        color: #909399;
+      }
+      .status-ongoing {
+        color: #67c23a;
+      }
+      .status-ended {
+        color: #f56c6c;
+      }
+      .activity-status-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .activity-status-row .item-label {
+        margin-left: 10px;
+      }
+      
+      /* 验证码区域样式 */
+      .verification-code-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      .verification-code-container .el-input {
+        vertical-align: middle;
+      }
+      
+      .verification-code-container img {
+        height: 32px;
+        border: 1px solid #dcdfe6;
+        border-radius: 4px;
+        cursor: pointer;
+        vertical-align: middle;
+      }
+      
+      .verification-code-container img:hover {
+        border-color: #409eff;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript" th:src="@{/axios/axios.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/vue.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/jsencrypt.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/js.cookie.min.js}"></script>
+    <script type="text/javascript" th:src="@{/element-ui/index.js}"></script>
+    <script type="text/javascript" th:src="@{/js/login-check.js}"></script>
+    <div id="app">
+      <div class="page-wrap" >
+        <div v-if="!userInfo">
+          <el-alert
+            type="warning"
+            :closable="false"
+            center
+          >
+              <slot name="title">
+                您还没有登录，请<a href="/login">登录</a>后再操作
+              </slot>
+
+          </el-alert>
+        </div>
+        <div class="container">
+          <!-- 页面头部 -->
+          <div class="page-header">
+            <div class="breadcrumb">
+              <i class="fas fa-home"></i>
+              <a @click="goToHome">首页</a>
+              <span>/</span>
+              <span>商品详情</span>
+            </div>
+            <h1 class="page-title">
+              <i class="fas fa-shopping-cart"></i>
+              商品详情
+            </h1>
+          </div>
+          
+          <div  th:if="${productDetail eq null}">
+             详情数据为空!
+          </div>
+          <div class="row" th:if="${productDetail ne null}">
+            <div class="img-wrap">
+              <img
+                th:src="@{${productDetail.cover}}"
+                width="200"
+                height="200"
+              />
+            </div>
+            <div class="content-wrap">
+              <div class="product-name" th:text="${productDetail.name}"></div>
+              <div class="item">
+                <span class="item-label">规格</span>
+                <span
+                        class="item-value"
+                        th:text="${productDetail.model}"
+                ></span>
+              </div>
+              <div class="price-wrap">
+                <div>
+                  <span class="item-label">秒杀价</span>
+                  <span class="price" th:text="${productDetail.price}"></span>
+                </div>
+                <div class="ml20">
+                  <span class="item-label">商品原价</span>
+                  <span
+                    class="costPrice"
+                    th:text="${productDetail.costPrice}"
+                  ></span>
+                </div>
+              </div>
+              <div class="item">
+                <span class="item-label">库存数量</span>
+                <span
+                  class="item-value"
+                  th:text="${productDetail.withHoldQuantity}"
+                ></span>
+              </div>
+              <div class="item">
+                <span class="item-label">验证码</span>
+                <div class="verification-code-container">
+                  <el-input v-model="form.code" auto-complete="off" style="width: 80px;">
+                    <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
+                  </el-input>
+                  <img :src="codeUrl" @click="getCode" alt="验证码">
+                </div>
+              </div>
+              <div class="item">
+                <span class="item-label">开始时间</span>
+                <span
+                        class="item-value"
+                        th:text="${#dates.format(productDetail.startTime, 'yyyy-MM-dd HH:mm:ss')}"
+                ></span>
+              </div>
+              <div class="item">
+                <span class="item-label">结束时间</span>
+                <span
+                        class="item-value"
+                        th:text="${#dates.format(productDetail.endTime, 'yyyy-MM-dd HH:mm:ss')}"
+                ></span>
+              </div>
+              <div class="item">
+                <span class="item-label">活动状态：</span>
+                <span class="activity-status">
+                  <span th:if="${productDetail.seckillStatus eq 0}" class="status-not-started">未开始</span>
+                  <span th:if="${productDetail.seckillStatus eq 1}" class="status-ongoing">
+                     倒计时：
+                     <span id="remainSecondsShow" v-if="remainSeconds>0" class="timer">{{remainSeconds}}秒</span>
+                  </span>
+                  <span th:if="${productDetail.seckillStatus eq 2}" class="status-ongoing">进行中</span>
+                  <span th:if="${productDetail.seckillStatus eq 3}" class="status-ended">已结束</span>
+                </span>
+              </div>
+              <div class="item">
+                <el-button :disabled="!canSeckill" type="primary" native-type="submit" id="buyButton" @click="onSubmit"
+                >立即秒杀</el-button>
+              </div>
+              <div>
+                <span>
+                   
+                </span>
+
+              </div>
+              <div class="item">
+                <div class="item-label">商品详情</div>
+                <div
+                        class="detail-value"
+                        v-html="detail"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script th:inline="javascript" type="text/javascript">
+    new Vue({
+      el: "#app",
+      data: function () {
+        return {
+          codeUrl: '',
+          userInfo: null,
+          canSeckill: false,
+          form: {
+            code: '',
+            uuid: '',
+            seckillProductId: ''
+          },
+          rules: {
+            code: [{ required: true, trigger: 'change', message: '验证码不能为空' }]
+          },
+          detail: [[${productDetail?.detail}]],
+          remainSeconds: 0,
+          seckillStatus: 0
+        };
+      },
+      created() {
+        // 获取验证码
+        this.getUserInfo()
+        this.getCode()
+        this.getSeconds()
+      },
+      methods: {
+        getSeconds() {
+          this.remainSeconds = [[${productDetail?.remainSeconds}]]
+          this.seckillStatus = [[${productDetail?.seckillStatus}]]
+          
+          // 根据秒杀状态设置按钮是否可用
+          // 状态2表示进行中，可以秒杀
+          if(this.seckillStatus === 2) {
+            this.canSeckill = true
+          } else if(this.remainSeconds > 0) {
+            // 倒计时状态，等待倒计时结束
+            let timer = setInterval(() => {
+              this.remainSeconds = this.remainSeconds - 1
+              if(this.remainSeconds === 0) {
+                clearInterval(timer)
+                this.seckillStatus = 2
+                this.canSeckill = true
+              }
+            }, 1000);
+          } else {
+            // 未开始或已结束状态，不可秒杀
+            this.canSeckill = false
+          }
+        },
+        getCode() {
+          axios.get("/code").then(res => {
+            const data = res.data
+            this.codeUrl = data.img
+            this.form.uuid = data.uuid
+            this.form.code = data.code
+          })
+        },
+        getUserInfo() {
+          axios.get("/getUserInfo", {headers: this.getHeaders()}).then(res => {
+            const data = res.data
+            this.userInfo = data
+          }).catch(error => {
+            LoginChecker.handleApiError(error);
+          });
+        },
+        getResult() {
+          const that = this
+          axios.post("/getResult", this.form, {headers: this.getHeaders()}).then((res) => {
+            const data = res.data
+            if (data && data.id){
+                this.$message.info('恭喜你秒杀成功');
+                window.location.href = "/order/detail?orderCode=" + data.code;
+            } else {
+              setTimeout(function () {
+                that.getResult();
+              }, 200);
+            }
+          })
+        },
+        getHeaders() {
+          const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic@' + Cookies.get('ZHU-TOKEN')
+          }
+          return headers;
+        },
+        onSubmit() {
+           // 验证表单
+           if (!this.form.code || this.form.code.trim() === '') {
+             this.$message.error('请输入验证码');
+             return;
+           }
+           
+           // 检查是否可以秒杀
+           if (!this.canSeckill) {
+             this.$message.warning('当前不在秒杀时间内，请稍后再试');
+             return;
+           }
+           
+           // 显示加载状态
+           const loading = this.$loading({
+             lock: true,
+             text: '正在处理秒杀请求...',
+             spinner: 'el-icon-loading',
+             background: 'rgba(0, 0, 0, 0.7)'
+           });
+           
+           this.form.seckillProductId = [[${productDetail?.id}]];
+           
+           axios.post("/doSeckillProduct", this.form, {headers: this.getHeaders()})
+             .then((res) => {
+               loading.close();
+               const data = res.data;
+               
+               // 如果返回数据为空或者code为0且没有错误消息，表示请求成功，跳转到排队页面
+               if (!data || (data.code === 0 && !data.message)) {
+                 this.$message.success('秒杀请求已提交，正在处理中...');
+                 // 跳转到排队页面，传递必要的参数
+                 window.location.href = "/queue?seckillProductId=" + this.form.seckillProductId + 
+                                       "&uuid=" + this.form.uuid + 
+                                       "&code=" + this.form.code;
+               } else {
+                 // 处理业务错误
+                 this.handleBusinessError(data);
+               }
+             })
+             .catch(error => {
+               loading.close();
+               this.handleRequestError(error);
+             });
+         },
+         
+         /**
+          * 处理业务错误
+          */
+         handleBusinessError(data) {
+           if (data && data.message) {
+             // 根据错误类型显示不同的提示
+             if (data.message.includes('售罄') || data.message.includes('库存')) {
+               this.$message.error('很遗憾，商品已售罄！');
+             } else if (data.message.includes('验证码')) {
+               this.$message.error('验证码错误，请重新输入');
+               this.getCode(); // 刷新验证码
+             } else if (data.message.includes('时间') || data.message.includes('未开始') || data.message.includes('已结束')) {
+               this.$message.warning('当前不在秒杀时间内');
+             } else if (data.message.includes('登录')) {
+               this.$message.error('登录状态已过期，请重新登录');
+               setTimeout(() => {
+                 window.location.href = '/login';
+               }, 2000);
+             } else {
+               // 显示具体的错误信息
+               this.$message.error(data.message);
+             }
+           } else if (data && data.code) {
+             // 处理HTTP状态码错误
+             if (data.code === 403) {
+               this.$message.error('登录状态已过期，请重新登录');
+               setTimeout(() => {
+                 window.location.href = '/login';
+               }, 2000);
+             } else {
+               this.$message.error('操作失败，请稍后重试');
+             }
+           } else {
+             this.$message.error('操作失败，请稍后重试');
+           }
+         },
+         
+         /**
+          * 处理请求错误
+          */
+         handleRequestError(error) {
+           if (error.response) {
+             const status = error.response.status;
+             const data = error.response.data;
+             
+             if (status === 403) {
+               this.$message.error('登录状态已过期，请重新登录');
+               setTimeout(() => {
+                 window.location.href = '/login';
+               }, 2000);
+             } else if (status === 500) {
+               if (data && data.message) {
+                 this.handleBusinessError(data);
+               } else {
+                 this.$message.error('服务器内部错误，请稍后重试');
+               }
+             } else if (status === 400) {
+               this.$message.error('请求参数错误，请检查输入信息');
+             } else {
+               this.$message.error('网络请求失败，请检查网络连接');
+             }
+           } else if (error.request) {
+             this.$message.error('网络连接失败，请检查网络设置');
+           } else {
+             this.$message.error('请求发送失败，请稍后重试');
+           }
+         },
+          goToHome() {
+            window.location.href = "/product/list";
+          }
+      }
+    });
+  </script>
+</html>

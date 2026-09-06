@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import cn.net.zhu.seckill.business.entity.ResponsePageEntity;
 import cn.net.zhu.seckill.business.entity.product.ESSeckillProductConditionEntity;
-import cn.net.zhu.seckill.business.entity.seckill.ESSeckillProductEntity;
+import cn.net.zhu.seckill.business.entity.seckill.EsSeckillProductEntity;
 import cn.net.zhu.seckill.business.entity.seckill.SeckillProductDetailPageEntity;
 import cn.net.zhu.seckill.business.service.ProductService;
 import cn.net.zhu.seckill.business.util.RedisUtil;
@@ -77,7 +77,7 @@ public class ProductServiceImpl implements ProductService {
      * @return 分页商品结果集
      */
     @Override
-    public ResponsePageEntity<ESSeckillProductEntity> searchProductList(
+    public ResponsePageEntity<EsSeckillProductEntity> searchProductList(
             ESSeckillProductConditionEntity condition) {
         try {
             // 1.构建搜索缓存key，优先查询Redis缓存
@@ -109,10 +109,10 @@ public class ProductServiceImpl implements ProductService {
             SearchResponse response = restHighLevelClient.search(request, RequestOptions.DEFAULT);
 
             // 4.解析ES返回结果，封装分页对象
-            List<ESSeckillProductEntity> list = Arrays.stream(response.getHits().getHits())
-                    .map(hit -> JSON.parseObject(hit.getSourceAsString(), ESSeckillProductEntity.class))
+            List<EsSeckillProductEntity> list = Arrays.stream(response.getHits().getHits())
+                    .map(hit -> JSON.parseObject(hit.getSourceAsString(), EsSeckillProductEntity.class))
                     .collect(Collectors.toList());
-            ResponsePageEntity<ESSeckillProductEntity> result = new ResponsePageEntity<>();
+            ResponsePageEntity<EsSeckillProductEntity> result = new ResponsePageEntity<>();
             result.setData(list);
             result.setTotalCount(response.getHits().getTotalHits().value);
             result.setPageNo(condition.getPageNo());
@@ -161,8 +161,8 @@ public class ProductServiceImpl implements ProductService {
             GetRequest request = new GetRequest(ES_INDEX, id.toString());
             GetResponse response = restHighLevelClient.get(request, RequestOptions.DEFAULT);
             if (response.isExists()) {
-                ESSeckillProductEntity esProduct = JSON.parseObject(
-                        response.getSourceAsString(), ESSeckillProductEntity.class);
+                EsSeckillProductEntity esProduct = JSON.parseObject(
+                        response.getSourceAsString(), EsSeckillProductEntity.class);
                 SeckillProductDetailPageEntity detail = new SeckillProductDetailPageEntity();
                 // 属性拷贝，正式项目建议替换BeanUtils.copyProperties
                 detail.setId(esProduct.getId());
@@ -229,12 +229,12 @@ public class ProductServiceImpl implements ProductService {
      * @return ES原始实体，不存在返回null
      */
     @Override
-    public ESSeckillProductEntity getProductFromES(Long id) {
+    public EsSeckillProductEntity getProductFromES(Long id) {
         try {
             GetRequest request = new GetRequest(ES_INDEX, id.toString());
             GetResponse response = restHighLevelClient.get(request, RequestOptions.DEFAULT);
             if (response.isExists()) {
-                return JSON.parseObject(response.getSourceAsString(), ESSeckillProductEntity.class);
+                return JSON.parseObject(response.getSourceAsString(), EsSeckillProductEntity.class);
             }
         } catch (Exception e) {
             log.error("从ES查询商品失败, id={}", id, e);

@@ -2,7 +2,7 @@ package cn.net.zhu.seckill.api.controller;
 
 import cn.net.zhu.seckill.business.entity.ResponsePageEntity;
 import cn.net.zhu.seckill.business.entity.product.ESSeckillProductConditionEntity;
-import cn.net.zhu.seckill.business.entity.seckill.ESSeckillProductEntity;
+import cn.net.zhu.seckill.business.entity.seckill.EsSeckillProductEntity;
 import cn.net.zhu.seckill.business.entity.seckill.SeckillProductDetailPageEntity;
 import cn.net.zhu.seckill.business.service.ProductService;
 import io.swagger.annotations.Api;
@@ -48,7 +48,7 @@ public class ProductController {
      * @return ResponsePageEntity<ESSeckillProductEntity> ES分页商品数据
      */
     @PostMapping("/searchProductList")
-    public ResponsePageEntity<ESSeckillProductEntity> searchProductList(
+    public ResponsePageEntity<EsSeckillProductEntity> searchProductList(
             @RequestBody ESSeckillProductConditionEntity condition) {
         return productService.searchProductList(condition);
     }
