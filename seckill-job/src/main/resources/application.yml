@@ -1,12 +1,16 @@
 spring:
   application:
-    name: seckill-api
+    name: seckill-job
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/zhu_seckill?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
     username: root
     password: root
+  redis:
+    database: 5
+    host: 127.0.0.1
+    port: 6379
 
 server:
   port: 8014
