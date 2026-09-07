@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>订单详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/element-ui/index.css}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style type="text/css">
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        background: #f8f9fa;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        line-height: 1.6;
+        color: #212529;
+        font-size: 14px;
+      }
+      
+      /* 页面容器 */
+      .page-container {
+        min-height: 100vh;
+        background: #f8f9fa;
+        padding: 20px 0;
+      }
+      
+      .main-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      
+      /* 页面头部 */
+      .page-header {
+        background: white;
+        border-radius: 8px;
+        padding: 24px 32px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        border: 1px solid #e9ecef;
+      }
+      
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: #6c757d;
+      }
+      
+      .breadcrumb a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+      .page-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #212529;
+        margin: 0;
+      }
+      
+      /* 主要内容区域 */
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+      
+      /* 订单信息卡片 */
+      .order-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        overflow: hidden;
+      }
+      
+      .card-header {
+        background: #fff;
+        padding: 24px 32px;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .order-number {
+        font-size: 18px;
+        font-weight: 600;
+        color: #212529;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .order-number i {
+        color: #007bff;
+      }
+      
+      .status-badge {
+        padding: 6px 12px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      
+      .status-badge.pending {
+        background: #fff3cd;
+        color: #856404;
+        border-color: #ffeaa7;
+      }
+      
+      .status-badge.processing {
+        background: #cce5ff;
+        color: #004085;
+        border-color: #99d6ff;
+      }
+      
+      .status-badge.completed {
+        background: #d4edda;
+        color: #155724;
+        border-color: #c3e6cb;
+      }
+      
+      .status-badge.cancelled {
+        background: #f8d7da;
+        color: #721c24;
+        border-color: #f5c6cb;
+      }
+      
+      /* 商品信息区域 */
+      .product-section {
+        padding: 32px;
+      }
+      
+      .product-display {
+        display: flex;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      
+      .product-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 1px solid #e9ecef;
+        flex-shrink: 0;
+      }
+      
+      .product-details {
+        flex: 1;
+      }
+      
+      .product-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: #212529;
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+      
+      .product-price {
+        font-size: 20px;
+        font-weight: 700;
+        color: #dc3545;
+        margin-bottom: 12px;
+      }
+      
+      .product-specs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+      
+      .spec-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #f8f9fa;
+        font-size: 14px;
+      }
+      
+      .spec-label {
+        color: #6c757d;
+        font-weight: 500;
+      }
+      
+      .spec-value {
+        color: #212529;
+        font-weight: 600;
+      }
+      
+      /* 订单详情表格 */
+      .order-details-table {
+        margin-top: 32px;
+      }
+      
+      .table-header {
+        font-size: 16px;
+        font-weight: 600;
+        color: #212529;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #007bff;
+      }
+      
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+      }
+      
+      .detail-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        background: #f8f9fa;
+        border-radius: 6px;
+        border-left: 3px solid #007bff;
+      }
+      
+      .detail-label {
+        color: #6c757d;
+        font-weight: 500;
+        font-size: 14px;
+      }
+      
+      .detail-value {
+        color: #212529;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      
+      /* 侧边栏 */
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      
+      /* 订单状态卡片 */
+      .status-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        overflow: hidden;
+      }
+      
+      .status-header {
+        background: #007bff;
+        color: white;
+        padding: 16px 20px;
+        font-weight: 600;
+        font-size: 16px;
+      }
+      
+      .status-content {
+        padding: 20px;
+      }
+      
+      .status-timeline {
+        position: relative;
+      }
+      
+      .timeline-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+        position: relative;
+      }
+      
+      .timeline-item:last-child {
+        margin-bottom: 0;
+      }
+      
+      .timeline-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #28a745;
+        border: 2px solid white;
+        box-shadow: 0 0 0 2px #28a745;
+        flex-shrink: 0;
+        margin-top: 4px;
+      }
+      
+      .timeline-dot.pending {
+        background: #6c757d;
+        box-shadow: 0 0 0 2px #6c757d;
+      }
+      
+      .timeline-content {
+        flex: 1;
+      }
+      
+      .timeline-title {
+        font-weight: 600;
+        color: #212529;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      
+      .timeline-time {
+        color: #6c757d;
+        font-size: 12px;
+      }
+      
+      /* 支付卡片 */
+      .payment-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        overflow: hidden;
+      }
+      
+      .payment-header {
+        background: #28a745;
+        color: white;
+        padding: 16px 20px;
+        font-weight: 600;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .payment-content {
+        padding: 20px;
+      }
+      
+      .payment-amount {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      
+      .amount-label {
+        color: #6c757d;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      
+      .amount-value {
+        font-size: 28px;
+        font-weight: 700;
+        color: #dc3545;
+      }
+      
+      .payment-methods {
+        margin-bottom: 20px;
+      }
+      
+      .methods-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #212529;
+        margin-bottom: 12px;
+      }
+      
+      .method-list {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      
+      .method-item {
+        padding: 6px 12px;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      
+      .pay-button {
+        width: 100%;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      
+      .pay-button:hover {
+        background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+      }
+      
+      /* 取消订单按钮样式 */
+      .cancel-button {
+        width: 100%;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 12px;
+        box-shadow: 0 2px 8px rgba(220,53,69,0.2);
+      }
+      
+      .cancel-button:hover {
+        background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(220,53,69,0.3);
+      }
+      
+      .cancel-button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(220,53,69,0.2);
+      }
+      
+      .cancel-button i {
+        font-size: 14px;
+      }
+      
+      .security-note {
+        margin-top: 12px;
+        padding: 8px 12px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #6c757d;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .main-wrapper {
+          padding: 0 16px;
+        }
+        
+        .content-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+        
+        .page-header {
+          padding: 16px 20px;
+        }
+        
+        .page-title {
+          font-size: 24px;
+        }
+        
+        .product-section {
+          padding: 20px;
+        }
+        
+        .product-display {
+          flex-direction: column;
+          gap: 16px;
+        }
+        
+        .product-image {
+          width: 100%;
+          height: 200px;
+        }
+        
+        .details-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .card-header {
+          padding: 16px 20px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+      }
+      
+      /* 动画效果 */
+      .order-card, .status-card, .payment-card {
+        transition: all 0.3s ease;
+      }
+      
+      .order-card:hover, .status-card:hover, .payment-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      }
+      
+      /* 加载动画 */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .order-card, .status-card, .payment-card {
+        animation: fadeIn 0.6s ease-out;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div class="page-container">
+      <div class="main-wrapper">
+        <!-- 页面头部 -->
+        <div class="page-header">
+          <div class="breadcrumb">
+            <i class="fas fa-home"></i>
+            <a href="javascript:void(0)" @click="goHome" style="color: #007bff; text-decoration: none;">首页</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="/order/list" style="color: #667eea; text-decoration: none;">我的订单</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>订单详情</span>
+          </div>
+          <h1 class="page-title">订单详情</h1>
+        </div>
+        
+        <!-- 主要内容区域 -->
+        <div class="content-grid">
+          <!-- 订单信息卡片 -->
+          <div class="order-card">
+            <div class="card-header">
+              <div class="order-number">
+                <i class="fas fa-receipt"></i>
+                订单号：<span th:text="${orderDetail.code}">202410050001</span>
+              </div>
+              <div class="status-badge" th:classappend="${orderDetail.orderStatus == 1} ? 'pending' : (${orderDetail.orderStatus == 2} ? 'processing' : (${orderDetail.orderStatus == 3} ? 'completed' : 'cancelled'))">
+                <span th:text="${orderDetail.orderStatus == 1} ? '待支付' : (${orderDetail.orderStatus == 2} ? '已支付' : (${orderDetail.orderStatus == 3} ? '已完成' : '已取消'))">待支付</span>
+              </div>
+            </div>
+            
+            <!-- 商品信息区域 -->
+            <div class="product-section">
+              <div class="product-display">
+                <img class="product-image" th:src="${orderDetail.cover}" alt="商品图片" />
+                <div class="product-details">
+                  <h2 class="product-name" th:text="${orderDetail.productName}">iPhone 15 Pro Max 256GB 深空黑色</h2>
+                  <div class="product-price">
+                    ¥<span th:text="${#numbers.formatDecimal(orderDetail.costPrice, 0, 2)}">8999.00</span>
+                  </div>
+                  
+                  <div class="product-specs">
+                    <div class="spec-item">
+                      <span class="spec-label">商品编号</span>
+                      <span class="spec-value" th:text="${orderDetail.productId}">10001</span>
+                    </div>
+                    <div class="spec-item">
+                      <span class="spec-label">购买数量</span>
+                      <span class="spec-value" th:text="${orderDetail.quantity} + '件'">1件</span>
+                    </div>
+                    <div class="spec-item">
+                      <span class="spec-label">商品单价</span>
+                      <span class="spec-value">¥<span th:text="${#numbers.formatDecimal(orderDetail.costPrice, 0, 2)}">8999.00</span></span>
+                    </div>
+                    <div class="spec-item">
+                      <span class="spec-label">秒杀价格</span>
+                      <span class="spec-value">¥<span th:text="${#numbers.formatDecimal(orderDetail.price, 0, 2)}">6999.00</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 订单详情表格 -->
+              <div class="order-details-table">
+                <div class="table-header">
+                  <i class="fas fa-info-circle"></i>
+                  订单信息
+                </div>
+                <div class="details-grid">
+                  <div class="detail-item">
+                    <span class="detail-label">下单时间</span>
+                    <span class="detail-value" th:text="${#dates.format(orderDetail.orderTime, 'yyyy-MM-dd HH:mm:ss')}">2024-10-05 10:30:25</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">支付时间</span>
+                    <span class="detail-value" th:text="${orderDetail.orderStatus >= 2 ? #dates.format(orderDetail.orderTime, 'yyyy-MM-dd HH:mm:ss') : '未支付'}">未支付</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">订单状态</span>
+                    <span class="detail-value" th:text="${orderDetail.orderStatus == 1} ? '待支付' : (${orderDetail.orderStatus == 2} ? '已支付' : (${orderDetail.orderStatus == 3} ? '已完成' : '已取消'))">待支付</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">用户名称</span>
+                    <span class="detail-value" th:text="${orderDetail.userName}">用户名</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">商品ID</span>
+                    <span class="detail-value" th:text="${orderDetail.productId}">1</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">订单总额</span>
+                    <span class="detail-value">¥<span th:text="${#numbers.formatDecimal(orderDetail.totalAmount, 0, 2)}">6999.00</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 侧边栏 -->
+          <div class="sidebar">
+            <!-- 订单状态卡片 -->
+            <div class="status-card">
+              <div class="status-header">
+                <i class="fas fa-truck"></i>
+                订单状态
+              </div>
+              <div class="status-content">
+                <div class="status-timeline">
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                      <div class="timeline-title">订单已创建</div>
+                      <div class="timeline-time" th:text="${#dates.format(orderDetail.orderTime, 'MM-dd HH:mm')}">10-05 10:30</div>
+                    </div>
+                  </div>
+                  <div class="timeline-item" th:if="${orderDetail.orderStatus >= 2}">
+                    <div class="timeline-dot" th:classappend="${orderDetail.orderStatus < 2} ? 'pending' : ''"></div>
+                    <div class="timeline-content">
+                      <div class="timeline-title">支付完成</div>
+                      <div class="timeline-time" th:text="${orderDetail.orderStatus >= 2 ? #dates.format(orderDetail.orderTime, 'MM-dd HH:mm') : '待支付'}">待支付</div>
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-dot pending"></div>
+                    <div class="timeline-content">
+                      <div class="timeline-title">商品发货</div>
+                      <div class="timeline-time">待发货</div>
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-dot pending"></div>
+                    <div class="timeline-content">
+                      <div class="timeline-title">订单完成</div>
+                      <div class="timeline-time">待完成</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 支付卡片 -->
+            <div class="payment-card" th:if="${orderDetail.orderStatus == 1}">
+              <div class="payment-header">
+                <i class="fas fa-credit-card"></i>
+                立即支付
+              </div>
+              <div class="payment-content">
+                <div class="payment-amount">
+                  <div class="amount-label">待支付金额</div>
+                  <div class="amount-value">¥<span th:text="${#numbers.formatDecimal(orderDetail.paymentAmount, 0, 2)}">6999.00</span></div>
+                </div>
+                
+                <div class="payment-methods">
+                  <div class="methods-title">支持的支付方式</div>
+                  <div class="method-list">
+                    <div class="method-item">
+                      <i class="fab fa-alipay"></i>
+                      支付宝
+                    </div>
+                    <div class="method-item">
+                      <i class="fab fa-weixin"></i>
+                      微信支付
+                    </div>
+                    <div class="method-item">
+                      <i class="fas fa-credit-card"></i>
+                      银行卡
+                    </div>
+                  </div>
+                </div>
+                
+                <button class="pay-button" @click="onPay">
+                  <i class="fas fa-lock"></i>
+                  立即支付
+                </button>
+                
+                <button class="cancel-button" @click="onCancelOrder">
+                  <i class="fas fa-times-circle"></i>
+                  取消订单
+                </button>
+                
+                <div class="security-note">
+                  <i class="fas fa-shield-alt"></i>
+                  支付信息已加密保护
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Vue.js 和 Element UI -->
+    <script th:src="@{/vue/vue.min.js}"></script>
+    <script th:src="@{/element-ui/index.js}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/login-check.js}"></script>
+    
+    <script type="text/javascript">
+      new Vue({
+        el: '.page-container',
+        data: {
+          // 数据可以在这里定义
+        },
+        methods: {
+           goHome: function() {
+             window.location.href = "/";
+           },
+           onPay: function() {
+             // 跳转到支付页面，使用字符串避免精度丢失
+             const orderCode = '[[${orderDetail.code}]]';
+             if (orderCode && orderCode.toString().length > 0) {
+                 window.location.href = '/payment?orderCode=' + orderCode;
+             } else {
+               alert('订单ID无效，无法跳转到支付页面');
+             }
+           },
+           onCancelOrder: function() {
+             // 取消订单功能
+             const orderCode = '[[${orderDetail.code}]]';
+             if (!orderCode) {
+               alert('订单编号不能为空');
+               return;
+             }
+             
+             if (confirm('确定要取消这个订单吗？')) {
+               fetch('/order/cancel', {
+                 method: 'POST',
+                 headers: {
+                   'Content-Type': 'application/json',
+                 },
+                 body: JSON.stringify({ orderCode: orderCode })
+               })
+               .then(response => response.json())
+               .then(data => {
+                 // 直接检查返回的布尔值
+                 if (data) {
+                   alert('订单已取消');
+                   location.reload();
+                 } else {
+                   alert('取消订单失败');
+                 }
+               })
+               .catch(error => {
+                 LoginChecker.handleApiError(error);
+               });
+             }
+           }
+         },
+         mounted: function() {
+          // 页面加载完成后的操作
+          console.log('订单详情页面加载完成');
+        }
+      });
+    </script>
+  </body>
+</html>

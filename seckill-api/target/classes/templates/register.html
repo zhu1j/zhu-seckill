@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>用户注册</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" th:href="@{/element-ui/index.css}" />
+
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      background: #f5f7fa;
+    }
+    
+    .content-wrap {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      overflow: hidden;
+    }
+    
+    /* 背景装饰元素 */
+    .content-wrap::before,
+    .content-wrap::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .content-wrap::before {
+      top: -100px;
+      left: -100px;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .content-wrap::after {
+      bottom: -150px;
+      right: -100px;
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translatey(0px);
+      }
+      50% {
+        transform: translatey(-20px);
+      }
+      100% {
+        transform: translatey(0px);
+      }
+    }
+    
+    /* 注册框 */
+    .box {
+      width: 520px;
+      min-height: 600px;
+      text-align: center;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 40px 50px 40px 50px;
+      box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+      position: relative;
+      z-index: 10;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform: translateY(0);
+      opacity: 1;
+      animation: boxEntrance 0.6s ease-out forwards;
+      overflow: visible;
+    }
+    
+    @keyframes boxEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 45px rgba(50, 50, 93, 0.15), 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Logo区域 */
+    .logo {
+      margin-bottom: 25px;
+    }
+    
+    .logo-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+      }
+    }
+    
+    .logo h1 {
+      color: #32325d;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    
+    .logo p {
+      color: #6b7280;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    
+    h2 {
+      margin-bottom: 30px;
+      color: #32325d;
+      font-size: 24px;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 3px;
+    }
+    
+    /* 表单样式优化 */
+    .register-form {
+      margin-bottom: 25px;
+    }
+    
+    .el-form-item {
+      margin-bottom: 25px;
+    }
+    
+    .el-form-item__label {
+      color: #32325d;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 0;
+    }
+    
+    /* Element UI 图标修复 */
+    .el-input--prefix .el-input__inner {
+      padding-left: 45px !important;
+    }
+    
+    .el-input__prefix {
+      position: absolute !important;
+      left: 15px !important;
+      top: 0 !important;
+      height: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 1 !important;
+      width: 20px !important;
+      pointer-events: none !important;
+    }
+    
+    .el-input__prefix .el-icon-user,
+    .el-input__prefix .el-icon-lock,
+    .el-input__prefix .el-icon-phone,
+    .el-input__prefix .el-icon-message {
+      font-size: 18px !important;
+      color: #333333 !important;
+      line-height: 1 !important;
+      text-shadow: none !important;
+      font-weight: bold !important;
+    }
+    
+    /* 强制显示图标 */
+    .el-input__prefix i {
+      display: inline-block !important;
+      font-style: normal !important;
+      font-variant: normal !important;
+      text-rendering: auto !important;
+      -webkit-font-smoothing: antialiased !important;
+    }
+    
+    /* Element UI 表单验证样式重置 */
+    .el-form-item.is-error .el-input__inner,
+    .el-form-item .el-input__inner {
+      border-color: rgba(255, 255, 255, 0.2) !important;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .el-form-item.is-error .el-input__inner:focus,
+    .el-form-item .el-input__inner:focus {
+      border-color: #4ecdc4 !important;
+      box-shadow: 0 0 15px rgba(78, 205, 196, 0.3) !important;
+    }
+    
+    .el-form-item__error {
+      display: none !important;
+    }
+    
+    /* 输入框基础样式 */
+    .el-input__inner {
+      height: 48px !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border-radius: 8px !important;
+      padding: 0 15px !important;
+      font-size: 15px !important;
+      color: #2d3748 !important;
+      transition: all 0.3s ease !important;
+      background: rgba(255, 255, 255, 0.9) !important;
+      backdrop-filter: blur(10px) !important;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .el-input__inner:focus {
+      border-color: #4ecdc4 !important;
+      box-shadow: 0 0 15px rgba(78, 205, 196, 0.3) !important;
+      background: rgba(255, 255, 255, 0.95) !important;
+      outline: none !important;
+    }
+    
+    .el-input__inner::placeholder {
+      color: rgba(100, 116, 139, 0.7) !important;
+    }
+    
+    /* 验证码区域 */
+    .captcha-container {
+      display: flex !important;
+      gap: 10px !important;
+      align-items: center !important;
+      flex-wrap: nowrap !important;
+      min-width: 0 !important;
+      width: 100% !important;
+      overflow: hidden !important;
+    }
+    
+    .captcha-input {
+      flex: 1 !important;
+      min-width: 70px !important;
+      max-width: calc(100% - 160px) !important;
+    }
+    
+    .captcha-input .el-input__inner {
+      height: 48px !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border-radius: 10px !important;
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      font-size: 15px !important;
+      color: #2d3748 !important;
+      transition: all 0.3s ease !important;
+      background: rgba(255, 255, 255, 0.9) !important;
+      backdrop-filter: blur(5px) !important;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .captcha-input .el-input__inner:focus {
+      border-color: #4ecdc4 !important;
+      box-shadow: 0 0 15px rgba(78, 205, 196, 0.3) !important;
+      background: rgba(255, 255, 255, 0.95) !important;
+    }
+    
+    .captcha-input .el-input__inner::placeholder {
+      color: rgba(100, 116, 139, 0.7) !important;
+    }
+    
+    .captcha-image {
+      width: 150px !important;
+      height: 48px !important;
+      border-radius: 10px !important;
+      border: 1px solid rgba(255, 255, 255, 0.3) !important;
+      cursor: pointer !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+      background: rgba(255, 255, 255, 0.9) !important;
+      backdrop-filter: blur(5px) !important;
+      object-fit: cover !important;
+      display: block !important;
+      flex-shrink: 0 !important;
+      min-width: 150px !important;
+      max-width: 150px !important;
+    }
+    
+    /* 验证码占位符样式 */
+    .captcha-placeholder {
+      width: 150px !important;
+      height: 48px !important;
+      border-radius: 10px !important;
+      border: 1px solid rgba(255, 255, 255, 0.3) !important;
+      cursor: pointer !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.9) 75%) !important;
+      background-size: 200% 100% !important;
+      animation: shimmer 1.5s infinite !important;
+      backdrop-filter: blur(5px) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      min-width: 150px !important;
+      max-width: 150px !important;
+      color: rgba(100, 116, 139, 0.7) !important;
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      text-align: center !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+    
+    .captcha-placeholder:hover {
+      border-color: #4ecdc4 !important;
+      box-shadow: 0 0 15px rgba(78, 205, 196, 0.4) !important;
+      transform: scale(1.05) !important;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 25%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.95) 75%) !important;
+    }
+    
+    /* 骨架屏动画 */
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+    
+    /* 加载点动画 */
+    .loading-dots {
+      display: inline-block !important;
+    }
+    
+    .loading-dots::after {
+      content: '' !important;
+      animation: dots 1.5s infinite !important;
+    }
+    
+    @keyframes dots {
+      0%, 20% {
+        content: '.' !important;
+      }
+      40% {
+        content: '..' !important;
+      }
+      60%, 100% {
+        content: '...' !important;
+      }
+    }
+    
+    .captcha-image:hover {
+      border-color: #4ecdc4 !important;
+      box-shadow: 0 0 15px rgba(78, 205, 196, 0.4) !important;
+      transform: scale(1.05) !important;
+      background: rgba(255, 255, 255, 0.95) !important;
+    }
+    
+    /* 手机验证码区域 */
+    .phone-code-container {
+      display: flex !important;
+      gap: 10px !important;
+      align-items: center !important;
+      flex-wrap: nowrap !important;
+      min-width: 0 !important;
+      width: 100% !important;
+      overflow: hidden !important;
+    }
+    
+    .phone-code-input {
+      flex: 1 !important;
+      min-width: 70px !important;
+      max-width: calc(100% - 120px) !important;
+    }
+    
+    .send-code-btn {
+      width: 110px !important;
+      height: 48px !important;
+      border-radius: 8px !important;
+      font-size: 14px !important;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      border: none !important;
+      color: white !important;
+      cursor: pointer !important;
+      transition: all 0.3s ease !important;
+      flex-shrink: 0 !important;
+    }
+    
+    .send-code-btn:hover {
+      background: linear-gradient(135deg, #7c8aed 0%, #8a5cb5 100%) !important;
+      transform: translateY(-1px) !important;
+    }
+    
+    .send-code-btn:disabled {
+      background: #ccc !important;
+      cursor: not-allowed !important;
+      transform: none !important;
+    }
+    
+    /* 按钮样式 */
+    .button-group {
+      display: flex !important;
+      gap: 10px !important;
+      margin-top: 20px !important;
+      width: 100% !important;
+      flex-wrap: nowrap !important;
+      min-width: 0 !important;
+      overflow: hidden !important;
+    }
+    
+    .el-button {
+      flex: 1 !important;
+      border-radius: 12px !important;
+      font-weight: 700 !important;
+      font-size: 16px !important;
+      padding: 14px 10px !important;
+      transition: all 0.3s ease !important;
+      height: 48px !important;
+      border: none !important;
+      letter-spacing: 0.5px !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+      -webkit-font-smoothing: antialiased !important;
+      -moz-osx-font-smoothing: grayscale !important;
+      min-width: 100px !important;
+      max-width: 50% !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+    }
+    
+    .reset-btn {
+      background: rgba(108, 117, 125, 0.9) !important;
+      border: 2px solid rgba(108, 117, 125, 1) !important;
+      color: #ffffff !important;
+      backdrop-filter: blur(10px) !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+      font-weight: 700 !important;
+    }
+    
+    .reset-btn:hover {
+      background: rgba(108, 117, 125, 1) !important;
+      border-color: rgba(108, 117, 125, 1) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+      color: #ffffff !important;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
+    }
+    
+    .register-btn {
+      background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+      border: none !important;
+      color: white !important;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4) !important;
+    }
+    
+    .register-btn:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5) !important;
+      background: linear-gradient(135deg, #9F7AEA 0%, #8B5CF6 100%) !important;
+    }
+    
+    .register-btn:active {
+      transform: translateY(0);
+    }
+    
+    /* 加载状态 */
+    .register-btn.is-loading {
+      position: relative;
+      color: transparent;
+    }
+    
+    .register-btn.is-loading::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      margin-left: -8px;
+      margin-top: -8px;
+      border: 2px solid transparent;
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: button-loading-spinner 1s ease infinite;
+    }
+    
+    @keyframes button-loading-spinner {
+      from {
+        transform: rotate(0turn);
+      }
+      to {
+        transform: rotate(1turn);
+      }
+    }
+    
+    /* 登录链接 */
+    .login-link {
+      margin-top: 20px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+    }
+    
+    .login-link a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .login-link a:hover {
+      color: #764ba2;
+      text-decoration: underline;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .box {
+        width: 90%;
+        padding: 30px 25px;
+        margin: 0 5%;
+      }
+      
+      .button-group {
+        flex-direction: column;
+      }
+      
+      .captcha-container,
+      .phone-code-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .captcha-image,
+      .send-code-btn {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .box {
+        padding: 25px 20px;
+      }
+      
+      .logo h1 {
+        font-size: 24px;
+      }
+      
+      h2 {
+        font-size: 20px;
+      }
+      
+      .el-input__inner {
+        height: 44px !important;
+        padding-left: 40px !important;
+      }
+      
+      .el-button {
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+<script type="text/javascript" th:src="@{/axios/axios.min.js}"></script>
+<script type="text/javascript" th:src="@{/vue/vue.min.js}"></script>
+<script type="text/javascript" th:src="@{/vue/jsencrypt.min.js}"></script>
+<script type="text/javascript" th:src="@{/vue/js.cookie.min.js}"></script>
+<script type="text/javascript" th:src="@{/element-ui/index.js}"></script>
+<div id="app">
+  <div class="content-wrap">
+    <div class="box">
+      <div class="logo">
+        <div class="logo-icon">S</div>
+        <h1>秒杀系统</h1>
+        <p>Secure & High Performance</p>
+      </div>
+      <h2>用户注册</h2>
+      <el-form ref="form" :model="form" :rules="rules" label-width="90px" label-position="left" class="register-form">
+        <el-form-item label="用户名" prop="username" :error="errors.username">
+          <el-input 
+            v-model="form.username" 
+            placeholder="请输入用户名"
+            prefix-icon="el-icon-user"
+            :class="{ 'is-error': errors.username }"
+            @blur="validateField('username')"
+            @input="clearFieldError('username')"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password" :error="errors.password">
+          <el-input 
+            type="password" 
+            v-model="form.password" 
+            placeholder="请输入密码"
+            prefix-icon="el-icon-lock"
+            :class="{ 'is-error': errors.password }"
+            @blur="validateField('password')"
+            @input="clearFieldError('password')"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码" prop="confirmPassword" :error="errors.confirmPassword">
+          <el-input 
+            type="password" 
+            v-model="form.confirmPassword" 
+            placeholder="请再次输入密码"
+            prefix-icon="el-icon-lock"
+            :class="{ 'is-error': errors.confirmPassword }"
+            @blur="validateField('confirmPassword')"
+            @input="clearFieldError('confirmPassword')"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="手机号" prop="phone" :error="errors.phone">
+          <el-input 
+            v-model="form.phone" 
+            placeholder="请输入手机号"
+            prefix-icon="el-icon-phone"
+            :class="{ 'is-error': errors.phone }"
+            @blur="validateField('phone')"
+            @input="clearFieldError('phone')"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="手机验证码" prop="phoneCode" :error="errors.phoneCode">
+          <div class="phone-code-container">
+            <el-input 
+              v-model="form.phoneCode" 
+              placeholder="请输入手机验证码"
+              class="phone-code-input"
+              :class="{ 'is-error': errors.phoneCode }"
+              @blur="validateField('phoneCode')"
+              @input="clearFieldError('phoneCode')"
+            ></el-input>
+            <button 
+              type="button"
+              class="send-code-btn"
+              @click="sendPhoneCode"
+              :disabled="phoneCodeCountdown > 0"
+            >
+              {{ phoneCodeCountdown > 0 ? `${phoneCodeCountdown}s` : '获取验证码' }}
+            </button>
+          </div>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email" :error="errors.email">
+          <el-input 
+            v-model="form.email" 
+            placeholder="请输入邮箱（可选）"
+            prefix-icon="el-icon-message"
+            :class="{ 'is-error': errors.email }"
+            @blur="validateField('email')"
+            @input="clearFieldError('email')"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="验证码" prop="code" :error="errors.code">
+          <div class="captcha-container">
+            <el-input 
+              v-model="form.code" 
+              placeholder="请输入验证码"
+              class="captcha-input"
+              :class="{ 'is-error': errors.code }"
+              @keyup.enter.native="onSubmit"
+              @blur="validateField('code')"
+              @input="clearFieldError('code')"
+            ></el-input>
+            <img 
+              v-if="codeUrl" 
+              :src="codeUrl" 
+              @click="getCode" 
+              class="captcha-image"
+              alt="验证码"
+            >
+            <div 
+              v-else 
+              @click="getCode" 
+              class="captcha-placeholder"
+            >
+              <span v-if="retryCount <= maxRetries" class="loading-dots">加载中</span>
+              <span v-else style="color: #f56565;">点击重试</span>
+            </div>
+          </div>
+        </el-form-item>
+      </el-form>
+      <div class="button-group">
+        <el-button class="reset-btn" @click="resetForm">重置</el-button>
+        <el-button 
+          type="primary" 
+          class="register-btn" 
+          @click="onSubmit"
+          :class="{ 'is-loading': loading }"
+          :disabled="loading"
+        >
+          {{ loading ? '注册中...' : '注册' }}
+        </el-button>
+      </div>
+      <div class="login-link">
+        已有账号？<a href="/login">立即登录</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  new Vue({
+    el: "#app",
+    data: function () {
+      return {
+        codeUrl: '',
+        loading: false,
+        phoneCodeCountdown: 0,
+        retryCount: 0,
+        maxRetries: 3,
+        form: {
+          username: "",
+          password: "",
+          confirmPassword: "",
+          phone: "",
+          phoneCode: "",
+          email: "",
+          nickname: "",
+          code: "",
+          uuid: ''
+        },
+        errors: {
+          username: '',
+          password: '',
+          confirmPassword: '',
+          phone: '',
+          phoneCode: '',
+          email: '',
+          code: ''
+        },
+        publicKey: 'MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANL378k3RiZHWx5AfJqdH9xRNBmD9wGD\n' +
+                '2iRe41HdTNF8RUhNnHit5NpMNtGL0NPTSSpPjjI1kJfVorRvaQerUgkCAwEAAQ==',
+        rules: {
+          username: [
+            { required: true, message: '请输入用户名', trigger: 'blur' },
+            { min: 3, max: 20, message: '用户名长度在 3 到 20 个字符', trigger: 'blur' },
+            { pattern: /^[a-zA-Z0-9_]+$/, message: '用户名只能包含字母、数字和下划线', trigger: 'blur' }
+          ],
+          password: [
+            { required: true, message: '请输入密码', trigger: 'blur' },
+            { min: 6, max: 20, message: '密码长度在 6 到 20 个字符', trigger: 'blur' }
+          ],
+          confirmPassword: [
+            { required: true, message: '请再次输入密码', trigger: 'blur' },
+            { validator: this.validateConfirmPassword, trigger: 'blur' }
+          ],
+          phone: [
+            { required: true, message: '请输入手机号', trigger: 'blur' },
+            { pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号', trigger: 'blur' }
+          ],
+          phoneCode: [
+            { required: true, message: '请输入手机验证码', trigger: 'blur' },
+            { pattern: /^\d{4}$/, message: '手机验证码为4位数字', trigger: 'blur' }
+          ],
+          email: [
+            { pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: '请输入正确的邮箱格式', trigger: 'blur' }
+          ],
+          code: [
+            { required: true, message: '请输入验证码', trigger: 'blur' },
+            { pattern: /^-?\d+$/, message: '验证码只能是数字', trigger: 'blur' }
+          ]
+        },
+      };
+    },
+    mounted() {
+      // 添加页面加载动画
+      setTimeout(() => {
+        document.querySelector('.box').style.animation = 'none';
+      }, 600);
+    },
+    created() {
+      // 获取验证码
+      this.getCode()
+    },
+    methods: {
+      encrypt(txt) {
+        const encryptor = new JSEncrypt()
+        encryptor.setPublicKey(this.publicKey) // 设置公钥
+        return encryptor.encrypt(txt) // 对数据进行加密
+      },
+      
+      getCode() {
+        // 清空当前验证码URL，显示加载状态
+        this.codeUrl = '';
+        
+        axios.get("/code").then(res => {
+          const data = res.data
+          this.codeUrl = data.img;
+          this.form.uuid = data.uuid;
+          // 成功后重置重试计数器
+          this.retryCount = 0;
+        }).catch(error => {
+          console.error("获取验证码失败：", error);
+          this.retryCount++;
+          
+          if (this.retryCount <= this.maxRetries) {
+            this.$message.warning(`获取验证码失败，正在重试 (${this.retryCount}/${this.maxRetries})`);
+            // 失败后延迟重试，延迟时间递增
+            setTimeout(() => {
+              this.getCode();
+            }, 1000 * this.retryCount);
+          } else {
+            this.$message.error("获取验证码失败，请刷新页面重试");
+            // 显示错误占位符
+            this.codeUrl = '';
+          }
+        });
+      },
+      
+      // 发送手机验证码
+      async sendPhoneCode() {
+        if (!this.form.phone) {
+          this.$message.warning('请先输入手机号');
+          return;
+        }
+        
+        if (!/^1[3-9]\d{9}$/.test(this.form.phone)) {
+          this.$message.warning('请输入正确的手机号');
+          return;
+        }
+        
+        try {
+          const res = await axios.post("/sendPhoneCode", null, {
+            params: { phone: this.form.phone }
+          });
+          
+          // 直接使用返回的字符串消息
+          this.$message.success(res.data);
+          // 开始倒计时
+          this.startPhoneCodeCountdown();
+        } catch (error) {
+          console.error("发送手机验证码失败：", error);
+          if (error.response && error.response.data) {
+            this.$message.error(error.response.data.message || "发送验证码失败，请重试");
+          } else {
+            this.$message.error("发送验证码失败，请重试");
+          }
+        }
+      },
+      
+      // 开始手机验证码倒计时
+      startPhoneCodeCountdown() {
+        this.phoneCodeCountdown = 60;
+        const timer = setInterval(() => {
+          this.phoneCodeCountdown--;
+          if (this.phoneCodeCountdown <= 0) {
+            clearInterval(timer);
+          }
+        }, 1000);
+      },
+      
+      // 验证确认密码
+      validateConfirmPassword(rule, value, callback) {
+        if (value !== this.form.password) {
+          callback(new Error('两次输入的密码不一致'));
+        } else {
+          callback();
+        }
+      },
+      
+      // 验证单个字段
+      validateField(field) {
+        this.$refs.form.validateField(field, (errorMessage) => {
+          this.errors[field] = errorMessage || '';
+        });
+      },
+      
+      // 清除字段错误
+      clearFieldError(field) {
+        this.errors[field] = '';
+      },
+      
+      // 验证所有字段
+      validateAllFields() {
+        let isValid = true;
+        
+        // 基础验证
+        if (!this.form.username) {
+          this.errors.username = '请输入用户名';
+          isValid = false;
+        }
+        if (!this.form.password) {
+          this.errors.password = '请输入密码';
+          isValid = false;
+        }
+        if (!this.form.confirmPassword) {
+          this.errors.confirmPassword = '请再次输入密码';
+          isValid = false;
+        }
+        if (!this.form.phone) {
+          this.errors.phone = '请输入手机号';
+          isValid = false;
+        }
+        if (!this.form.phoneCode) {
+          this.errors.phoneCode = '请输入手机验证码';
+          isValid = false;
+        }
+        if (!this.form.code) {
+          this.errors.code = '请输入验证码';
+          isValid = false;
+        }
+        
+        return isValid;
+      },
+      
+      // 重置表单
+      resetForm() {
+        this.$refs.form.resetFields();
+        this.errors = {
+          username: '',
+          password: '',
+          confirmPassword: '',
+          phone: '',
+          phoneCode: '',
+          email: '',
+          nickname: '',
+          code: ''
+        };
+        this.retryCount = 0; // 重置重试计数器
+        this.getCode(); // 重新获取验证码
+      },
+      
+      // 提交注册
+      async onSubmit() {
+        // 先进行基础验证和字段验证
+        if (!this.validateAllFields()) {
+          return;
+        }
+        
+        if (!this.form.uuid) {
+          this.$message.error('验证码已过期，请刷新页面重试');
+          this.getCode();
+          return;
+        }
+
+        // 进行表单验证
+        this.$refs.form.validate(async (valid) => {
+          if (!valid) {
+            this.$message.warning('请检查输入信息是否正确');
+            return;
+          }
+
+          this.loading = true;
+          
+          const params = {
+            username: this.form.username,
+            password: this.encrypt(this.form.password),
+            confirmPassword: this.encrypt(this.form.confirmPassword),
+            phone: this.form.phone,
+            phoneCode: this.form.phoneCode,
+            email: this.form.email,
+            code: this.form.code,
+            uuid: this.form.uuid,
+          };
+          
+          try {
+            const res = await axios.post("/doRegister", params);
+            this.loading = false;
+            const data = res.data;
+            
+            // 直接检查返回的字符串消息
+            if (data === "注册成功") {
+              this.$message.success('注册成功！即将跳转到登录页面');
+              setTimeout(() => {
+                window.location.href = "/login";
+              }, 1500);
+            } else {
+              this.$message.error("注册失败，请重试");
+              this.getCode(); // 刷新验证码
+            }
+          } catch (error) {
+            this.loading = false;
+            console.error("注册请求失败：", error);
+            
+            if (error.response) {
+              const errorData = error.response.data;
+              if (errorData && errorData.message) {
+                this.$message.error(errorData.message);
+              } else if (error.response.status === 500) {
+                this.$message.error("服务器内部错误，请稍后重试");
+              } else if (error.response.status === 404) {
+                this.$message.error("注册接口不存在，请联系管理员");
+              } else {
+                this.$message.error("注册失败，请重试");
+              }
+            } else if (error.request) {
+              this.$message.error("网络连接失败，请检查网络");
+            } else {
+              this.$message.error("请求发送失败，请重试");
+            }
+            
+            this.getCode(); // 刷新验证码
+          }
+        });
+      },
+    },
+  });
+</script>
+</html>

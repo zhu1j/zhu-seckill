@@ -298,6 +298,12 @@ public class UserSeckillProductServiceImpl implements UserSeckillProductService 
         // 更新进度：状态3，75%，正在扣减数据库库存
         setSeckillProcessStatus(seckillProductId, userName, 3, 75, "正在扣减库存...");
 
+        //下单口库存前检查库存是否足够
+        int affected = seckillProductMapper.reduceWithHoldStock(seckillProductId);
+        if (affected <= 0) {
+            throw new BusinessException("商品库存不足");
+        }
+
         // DB层面预扣锁定库存
         seckillProductMapper.reduceWithHoldStock(seckillProductId);
 
