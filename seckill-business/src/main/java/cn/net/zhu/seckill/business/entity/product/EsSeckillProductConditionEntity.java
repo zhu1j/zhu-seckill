@@ -21,7 +21,7 @@ import java.util.Date;
  */
 @ApiModel("秒杀商品查询条件实体")
 @Data
-public class ESSeckillProductConditionEntity extends RequestConditionEntity {
+public class EsSeckillProductConditionEntity extends RequestConditionEntity {
 
     /**
      * 秒杀商品ID

@@ -70,7 +70,7 @@ public class UserTokenHelper {
                 .signWith(SignatureAlgorithm.HS512, tokenSecret)
                 .compact();
         redisUtil.set(getTokenKey(username), token, tokenExpireTimeInRecord);
-        redisUtil.set(getTokenKey(username),json,tokenExpireTimeInRecord);
+        redisUtil.set(getUserKey(username),json,tokenExpireTimeInRecord);
         return token;
 
     }

@@ -3,7 +3,7 @@ package cn.net.zhu.seckill.business.service.impl;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import cn.net.zhu.seckill.business.entity.ResponsePageEntity;
-import cn.net.zhu.seckill.business.entity.product.ESSeckillProductConditionEntity;
+import cn.net.zhu.seckill.business.entity.product.EsSeckillProductConditionEntity;
 import cn.net.zhu.seckill.business.entity.seckill.EsSeckillProductEntity;
 import cn.net.zhu.seckill.business.entity.seckill.SeckillProductDetailPageEntity;
 import cn.net.zhu.seckill.business.service.ProductService;
@@ -78,7 +78,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public ResponsePageEntity<EsSeckillProductEntity> searchProductList(
-            ESSeckillProductConditionEntity condition) {
+            EsSeckillProductConditionEntity condition) {
         try {
             // 1.构建搜索缓存key，优先查询Redis缓存
             String cacheKey = buildSearchCacheKey(condition);
@@ -166,6 +166,7 @@ public class ProductServiceImpl implements ProductService {
                 SeckillProductDetailPageEntity detail = new SeckillProductDetailPageEntity();
                 // 属性拷贝，正式项目建议替换BeanUtils.copyProperties
                 detail.setId(esProduct.getId());
+//                detail.setId(Long.parseLong(response.getId()));
                 detail.setName(esProduct.getName());
                 detail.setPrice(esProduct.getPrice());
                 detail.setStartTime(esProduct.getStartTime());
@@ -247,7 +248,7 @@ public class ProductServiceImpl implements ProductService {
      * @param condition 查询条件
      * @return redis缓存key
      */
-    private String buildSearchCacheKey(ESSeckillProductConditionEntity condition) {
+    private String buildSearchCacheKey(EsSeckillProductConditionEntity condition) {
         return SEARCH_CACHE_PREFIX + JSON.toJSONString(condition);
     }
 }

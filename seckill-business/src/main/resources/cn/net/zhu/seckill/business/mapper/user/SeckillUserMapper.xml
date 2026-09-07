@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.net.zhu.seckill.business.mapper.seckill.SeckillUserMapper">
+<mapper namespace="cn.net.zhu.seckill.business.mapper.user.SeckillUserMapper">
 
     <resultMap type="cn.net.zhu.seckill.business.entity.user.SeckillUserEntity" id="SeckillUserResult">
         <result property="id" column="id"/>
@@ -110,7 +110,38 @@
             <if test="isDel != null">#{isDel},</if>
         </trim>
     </insert>
+    <!-- 更新用户 -->
+    <update id="update" parameterType="cn.net.zhu.seckill.business.entity.user.SeckillUserEntity">
+        UPDATE seckill_user
+        <set>
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="nickname != null and nickname != ''">nickname = #{nickname},</if>
+            <if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="registerTime != null">register_time = #{registerTime},</if>
+            <if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
+            <if test="updateUserId != null">update_user_id = #{updateUserId},</if>
+            <if test="updateUserName != null and updateUserName != ''">update_user_name = #{updateUserName},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        WHERE id = #{id} AND is_del = 0
+    </update>
 
+    <!-- 逻辑删除用户 -->
+    <update id="deleteByIds">
+        UPDATE seckill_user SET is_del = 1,
+        update_user_id = #{entity.updateUserId},
+        update_user_name = #{entity.updateUserName},
+        update_time = #{entity.updateTime}
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        AND is_del = 0
+    </update>
 
     <!-- 更新最后登录时间 -->
     <update id="updateLastLoginTime">

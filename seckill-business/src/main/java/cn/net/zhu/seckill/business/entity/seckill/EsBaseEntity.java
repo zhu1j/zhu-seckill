@@ -24,7 +24,7 @@ public class EsBaseEntity implements Serializable {
     /**
      * ID
      */
-    private String id;
+    private Long id;
 
     /**
      * 数据

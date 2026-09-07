@@ -1,7 +1,7 @@
 package cn.net.zhu.seckill.business.service;
 
 import cn.net.zhu.seckill.business.entity.ResponsePageEntity;
-import cn.net.zhu.seckill.business.entity.product.ESSeckillProductConditionEntity;
+import cn.net.zhu.seckill.business.entity.product.EsSeckillProductConditionEntity;
 import cn.net.zhu.seckill.business.entity.seckill.EsSeckillProductEntity;
 import cn.net.zhu.seckill.business.entity.seckill.SeckillProductDetailPageEntity;
 
@@ -17,7 +17,7 @@ public interface ProductService {
      * @return ResponsePageEntity<ESSeckillProductEntity> 分页结果，ES查询出来的秒杀商品数据
      */
     ResponsePageEntity<EsSeckillProductEntity> searchProductList(
-            ESSeckillProductConditionEntity condition);
+            EsSeckillProductConditionEntity condition);
 
     /**
      * 获取商品信息（用于秒杀列表简要信息）

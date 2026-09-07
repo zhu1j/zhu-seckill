@@ -1,7 +1,7 @@
 package cn.net.zhu.seckill.api.controller;
 
 import cn.net.zhu.seckill.business.entity.ResponsePageEntity;
-import cn.net.zhu.seckill.business.entity.product.ESSeckillProductConditionEntity;
+import cn.net.zhu.seckill.business.entity.product.EsSeckillProductConditionEntity;
 import cn.net.zhu.seckill.business.entity.seckill.EsSeckillProductEntity;
 import cn.net.zhu.seckill.business.entity.seckill.SeckillProductDetailPageEntity;
 import cn.net.zhu.seckill.business.service.ProductService;
@@ -49,7 +49,7 @@ public class ProductController {
      */
     @PostMapping("/searchProductList")
     public ResponsePageEntity<EsSeckillProductEntity> searchProductList(
-            @RequestBody ESSeckillProductConditionEntity condition) {
+            @RequestBody EsSeckillProductConditionEntity condition) {
         return productService.searchProductList(condition);
     }
 

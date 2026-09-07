@@ -26,6 +26,7 @@ import java.io.IOException;
 @Slf4j
 public class JwtTokenFilter implements Filter {
 
+    public static final String LOGIN_AGAN_INFO = "您登录状态已过期，为了保护您的账户安全，请重新登录";
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {

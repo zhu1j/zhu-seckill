@@ -10,9 +10,6 @@ import java.util.List;
  * 用户Mapper接口
  * 操作用户表：查询、新增、更新、逻辑删除、更新登录时间
  *
- * @author 苏三，该项目是知识星球：java突击队 的内部项目
- * @date 2025/10/4
- *
  * @author 一只朱
  * @date 2026-09-06 16:39
  *

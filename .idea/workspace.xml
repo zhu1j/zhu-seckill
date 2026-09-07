@@ -4,64 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.9.6第十三次提交：第十一阶段：订单超时模块;第十二阶段：库存一致性模块">
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/error.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/order_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/order_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/payment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/product_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/product_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/queue.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/register.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/RequestConditionEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/EsBaseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillProductDetailEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/mybatis-config.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-job/src/main/java/cn/net/zhu/seckill/job/consumer/OrderTimeoutConsumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seckill-job/src/main/java/cn/net/zhu/seckill/job/consumer/UserSeckillProductConsumer.java" afterDir="false" />
+    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.9.6第十四次提交 后续">
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth/JwtUserEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/SeckillUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/SeckillUserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/FillUserUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/ApiApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/config/FilterConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/config/WebConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/controller/TestController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/exception/GlobalExceptionHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/product/ESSeckillProductConditionEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/product/ESSeckillProductConditionEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/ESSeckillProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/EsSeckillProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/EsBaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/EsBaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/product/ESSeckillProductConditionEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/product/EsSeckillProductConditionEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/EsBaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/EsBaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillOrderTradeConditionEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillOrderTradeConditionEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillProductDetailPageEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillProductDetailPageEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductQueryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductQueryEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/filter/JwtTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/filter/JwtTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/helper/UserTokenHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/helper/UserTokenHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/seckill/SeckillUserMapper.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/user/SeckillUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/mapper/user/SeckillUserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/UserSeckillProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/UserSeckillProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/EsConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/RestTemplateConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/StockConsistencyConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/constant/NumberConstant.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/RequestPageEntity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/mq/OrderTimeoutMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/user/SeckillUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/user/SeckillUserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/EsBaseEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/EsBaseEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/product/ESSeckillProductConditionEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/product/ESSeckillProductConditionEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/ESSeckillProductEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/ESSeckillProductEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillOrderTradeConditionEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillOrderTradeConditionEntity.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillProductDetailPageEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillProductDetailPageEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundLogEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundLogEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductQueryEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductQueryEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductTradeEntity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/exception/BusinessException.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/filter/JwtTokenFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/filter/JwtTokenFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/mapper/seckill/SeckillRefundMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/AssertUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/AssertUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/RedisUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/RedisUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/SpringUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/mapper/seckill/SeckillUserMapper.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-business/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-business/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-job/src/main/java/cn/net/zhu/seckill/job/JobApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-job/src/main/java/cn/net/zhu/seckill/job/JobApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-job/target/classes/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-job/target/classes/cn/net/zhu/seckill/job/JobApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-job/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seckill-job/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +109,7 @@
     "Spring Boot.ApiApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/34129/Desktop/个人待办/精进计划/self/seckill/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper",
+    "last_opened_file_path": "C:/Users/34129/Desktop/个人待办/精进计划/self/seckill/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -152,9 +124,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\java\cn\net\zhu\seckill\business\entity\auth" />
+      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\java\cn\net\zhu\seckill\business\util" />
+      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\java\cn\net\zhu\seckill\business\service\impl" />
       <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\resources\cn\net\zhu\seckill\business\mapper" />
       <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-api\src\main\resources\templates" />
-      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\sql" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\resources" />
@@ -227,7 +201,8 @@
       <workItem from="1788313067652" duration="3839000" />
       <workItem from="1788480712536" duration="1228000" />
       <workItem from="1788505433284" duration="1220000" />
-      <workItem from="1788584411330" duration="30782000" />
+      <workItem from="1788584411330" duration="30830000" />
+      <workItem from="1788746969292" duration="8616000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <option name="closed" value="true" />
@@ -341,11 +316,30 @@
       <option name="project" value="LOCAL" />
       <updated>1788681384915</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="2026.9.6第十四次提交 后续">
+      <option name="closed" value="true" />
+      <created>1788705346622</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1788705346622</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="第一次提交" />
@@ -362,6 +356,7 @@
     <MESSAGE value="2026.9.6第十一次提交：第九阶段：支付管理模块" />
     <MESSAGE value="2026.9.6第十二次提交：第十阶段：退款管理模块" />
     <MESSAGE value="2026.9.6第十三次提交：第十一阶段：订单超时模块;第十二阶段：库存一致性模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="2026.9.6第十三次提交：第十一阶段：订单超时模块;第十二阶段：库存一致性模块" />
+    <MESSAGE value="2026.9.6第十四次提交 后续" />
+    <option name="LAST_COMMIT_MESSAGE" value="2026.9.6第十四次提交 后续" />
   </component>
 </project>

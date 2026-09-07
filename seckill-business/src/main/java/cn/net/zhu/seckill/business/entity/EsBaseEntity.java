@@ -1,5 +1,12 @@
 package cn.net.zhu.seckill.business.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.Map;
+
 /**
  *  ES 基础实体类
  *
@@ -8,6 +15,18 @@ package cn.net.zhu.seckill.business.entity;
  *
  * "Run the code. Run the world."
  */
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class EsBaseEntity implements Serializable {
 
-public class EsBaseEntity {
+    /**
+     * ID
+     */
+    private String id;
+
+    /**
+     * 数据
+     */
+    private Map<String, Object> data;
 }
