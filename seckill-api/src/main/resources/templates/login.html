@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>zhu秒杀 - 登录</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="text/javascript" th:src="@{/axios/axios.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/vue.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vue/jsencrypt.min.js}"></script>
     <style>
         .container { width: 400px; margin: 100px auto; padding: 30px; border: 1px solid #ddd; border-radius: 8px; }
         .form-group { margin-bottom: 15px; }
@@ -41,10 +42,16 @@
         el: '#app',
         data: {
             username: '', password: '', code: '',
-            uuid: '', captchaImg: ''
+            uuid: '', captchaImg: '',
+            publicKey: 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDF4E3jRLQEXuITk58qLk1r530ibQOfNWroYLRii4u78JVnWdiEglnm4fTIw16QKsjnh1cyPfFKqDDOUKWRC4i6JFWp7GcSwsrIEY+m5YyIZa3KhINJto0pJT0YicbKmgCa1+XAVOevQZsIVRsrLlPYkpd6lxWPeyWu75ZdAKXVUwIDAQAB'
         },
         created() { this.getCaptcha(); },
         methods: {
+            encrypt(txt) {
+                const encryptor = new JSEncrypt();
+                encryptor.setPublicKey(this.publicKey);
+                return encryptor.encrypt(txt);
+            },
             getCaptcha() {
                 axios.get('/code').then(res => {
                     this.uuid = res.data.uuid;
@@ -54,10 +61,12 @@
             doLogin() {
                 axios.post('/doLogin', {
                     uuid: this.uuid, username: this.username,
-                    password: this.password, code: this.code
+                    password: this.encrypt(this.password), code: this.code
                 }).then(res => {
                     localStorage.setItem('token', res.data.token);
                     localStorage.setItem('username', res.data.username);
+                    // 写入ZHU-TOKEN cookie：商品列表/详情/排队/支付等页面的请求头从该cookie读取
+                    document.cookie = 'ZHU-TOKEN=' + res.data.token + '; path=/';
                     window.location.href = '/product/list';
                 }).catch(err => {
                     alert(err.response?.data?.message || '登录失败');

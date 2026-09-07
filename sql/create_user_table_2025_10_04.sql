@@ -1,0 +1,26 @@
+-- 用户表
+CREATE TABLE `seckill_user` (
+  `id` bigint NOT NULL COMMENT '用户ID',
+  `username` varchar(50) NOT NULL COMMENT '用户名',
+  `password` varchar(255) NOT NULL COMMENT '密码（加密后）',
+  `phone` varchar(20) NOT NULL COMMENT '手机号',
+  `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
+  `nickname` varchar(50) DEFAULT NULL COMMENT '昵称',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '头像URL',
+  `status` tinyint NOT NULL DEFAULT '1' COMMENT '用户状态 1:正常 2:禁用',
+  `register_time` datetime(3) NOT NULL COMMENT '注册时间',
+  `last_login_time` datetime(3) DEFAULT NULL COMMENT '最后登录时间',
+  `create_user_id` bigint NOT NULL COMMENT '创建人ID',
+  `create_user_name` varchar(30) NOT NULL COMMENT '创建人名称',
+  `create_time` datetime(3) NOT NULL COMMENT '创建时间',
+  `update_user_id` bigint DEFAULT NULL COMMENT '修改人ID',
+  `update_user_name` varchar(30) DEFAULT NULL COMMENT '修改人名称',
+  `update_time` datetime(3) DEFAULT NULL COMMENT '修改时间',
+  `is_del` tinyint(1) DEFAULT '0' COMMENT '是否删除 1:已删除 0:未删除',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `uk_username` (`username`) USING BTREE,
+  UNIQUE KEY `uk_phone` (`phone`) USING BTREE,
+  KEY `idx_status` (`status`) USING BTREE,
+  KEY `idx_register_time` (`register_time`) USING BTREE,
+  KEY `idx_create_time` (`create_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表';

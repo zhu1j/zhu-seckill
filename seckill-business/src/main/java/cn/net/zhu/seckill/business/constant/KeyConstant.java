@@ -10,8 +10,17 @@ package cn.net.zhu.seckill.business.constant;
  */
 
 public class KeyConstant {
-    private KeyConstant() {}
+    private KeyConstant() {
 
-    public static final String SECKILL_PRODUCT_DETAIL_PREFIX = "seckillProductDetail:";
+    }
+
+    /**
+     * 秒杀商品详情Redis中key的前缀
+     */
+    public static final String SECKILL_PRODUCT_DETAIL_PFREFIX = "seckillProductDetail:";
+
+    /**
+     * 秒杀商品库存
+     */
     public static final String SECKILL_PRODUCT_STOCK_PREFIX = "seckillProductStock:";
 }

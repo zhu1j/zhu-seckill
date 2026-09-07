@@ -75,6 +75,9 @@ public class SeckillPaymentServiceImpl implements SeckillPaymentService {
         payment.setPaymentMethod(paymentMethod);
         payment.setPaymentStatus(1); // 待支付
         payment.setCreateTime(new Date());
+        // 创建人信息，满足表NOT NULL约束
+        payment.setCreateUserId(order.getUserId());
+        payment.setCreateUserName(order.getUserName());
         seckillPaymentMapper.insert(payment);
         log.info("创建支付记录成功，订单号：{}", orderCode);
         return payment;

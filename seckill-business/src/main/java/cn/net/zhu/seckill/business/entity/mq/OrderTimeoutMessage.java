@@ -16,13 +16,50 @@ import java.util.Date;
 
 @Data
 public class OrderTimeoutMessage implements Serializable {
-    private Long orderId; //订单id
-    private String orderCode; //订单编号
-    private Long userId; //用户id
-    private String userName; //用户账号名称
-    private Long seckillProductId; //秒杀商品id
-    private Long productId; //原商品id
-    private Date orderTime; //下单时间
-    private Integer timeoutMinutes; //超时时间(分钟)
-    private Date messageCreateTime; //消息创建时间
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 订单ID
+     */
+    private Long orderId;
+
+    /**
+     * 订单编码
+     */
+    private String orderCode;
+
+    /**
+     * 用户ID
+     */
+    private Long userId;
+
+    /**
+     * 用户名称
+     */
+    private String userName;
+
+    /**
+     * 秒杀商品ID
+     */
+    private Long seckillProductId;
+
+    /**
+     * 商品ID
+     */
+    private Long productId;
+
+    /**
+     * 订单创建时间
+     */
+    private Date orderTime;
+
+    /**
+     * 超时时间（分钟）
+     */
+    private Integer timeoutMinutes;
+
+    /**
+     * 消息创建时间
+     */
+    private Date messageCreateTime;
 }

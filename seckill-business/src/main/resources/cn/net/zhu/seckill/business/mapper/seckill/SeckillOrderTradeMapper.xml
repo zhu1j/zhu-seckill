@@ -19,6 +19,7 @@
         <result property="productName" column="product_name"/>
         <result property="model" column="model"/>
         <result property="price" column="price"/>
+        <result property="cover" column="cover"/>
         <result property="costPrice" column="cost_price"/>
         <result property="quantity" column="quantity"/>
         <result property="remark" column="remark"/>
@@ -47,6 +48,7 @@
           product_name,
           model,
           price,
+          cover,
           cost_price,
           quantity,
           remark,
@@ -259,7 +261,7 @@
         WHERE id = #{id}
     </update>
 
-    <insert id="insert" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillOrderTradeEntity" keyProperty="id" userGeneratedKeys="true">
+    <insert id="insert" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillOrderTradeEntity" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO seckill_order_trade
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -306,6 +308,9 @@
                 </if>
                 <if test="price != null">
                     price,
+                </if>
+                <if test="cover != null and cover != ''">
+                    cover,
                 </if>
                 <if test="costPrice != null">
                     cost_price,
@@ -383,6 +388,9 @@
                     </if>
                     <if test="price != null">
                         #{price},
+                    </if>
+                    <if test="cover != null and cover != ''">
+                        #{cover},
                     </if>
                     <if test="costPrice != null">
                         #{costPrice},

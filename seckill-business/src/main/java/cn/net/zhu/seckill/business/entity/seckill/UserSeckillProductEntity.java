@@ -1,7 +1,8 @@
 package cn.net.zhu.seckill.business.entity.seckill;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -15,11 +16,29 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class UserSeckillProductEntity {
-    @NotNull(message = "秒杀商品ID不能为空")
+    /**
+     * 秒杀商品ID
+     */
+    @ApiModelProperty("秒杀商品ID")
+    @NotNull(message = "seckillProductId不能为空")
     private Long seckillProductId;
-    @NotNull(message = "验证码标识不能为空")
+
+    /**
+     * 验证码uuid
+     */
+    @ApiModelProperty("验证码uuid")
+    @NotEmpty(message = "uuid不能为空")
     private String uuid;
-    @NotNull(message = "验证码不能为空")
+
+    /**
+     * 验证码code
+     */
+    @ApiModelProperty("验证码code")
+    @NotEmpty(message = "code不能为空")
     private String code;
+
+    /**
+     * 用户名称
+     */
     private String userName;
 }

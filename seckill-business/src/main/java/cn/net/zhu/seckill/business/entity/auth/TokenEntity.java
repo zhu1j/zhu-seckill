@@ -17,8 +17,23 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class TokenEntity {
+    /**
+     * 用户名称
+     */
     private String username;
+
+    /**
+     * token
+     */
     private String token;
+
+    /**
+     * 角色信息
+     */
     private List<String> roles;
+
+    /**
+     * 过期时间
+     */
     private int expiresIn;
 }

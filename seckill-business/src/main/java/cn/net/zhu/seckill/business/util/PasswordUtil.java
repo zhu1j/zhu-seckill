@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PasswordUtil {
-    @Value("${seckill.password.privateKey}")
+    @Value("${seckill.password.privateKey:}")
     private String privateKey;
 
     @Autowired

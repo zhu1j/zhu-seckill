@@ -552,7 +552,20 @@
           </div>
 
           <!-- 主要内容区域 -->
-          <div class="content-grid">
+          <div class="content-grid" th:if="${orderDetail eq null}">
+            <div class="order-card">
+              <div class="card-header">
+                <div class="card-title">
+                  <i class="fas fa-info-circle"></i>
+                  订单不存在或已被删除
+                </div>
+              </div>
+              <p style="padding: 20px; font-size: 14px; color: #6c757d;">
+                请检查订单号是否正确，或 <a href="/order/list" style="color: #007bff;">返回订单列表</a>
+              </p>
+            </div>
+          </div>
+          <div class="content-grid" th:if="${orderDetail ne null}">
             <!-- 左侧：订单信息 -->
             <div class="order-card">
               <div class="card-header">
@@ -758,18 +771,19 @@
             const paymentData = createResponse.data;
             
             // 2. 处理支付
-            const processResponse = await axios.post('/seckill/payment/process', {
-              paymentId: paymentData.id,
-              thirdPartyTransactionNo: this.generateTransactionNo()
-            }, {
-              headers: this.getHeaders()
-            });
-            
+            // 后端契约：@RequestParam，参数走query
+            const processResponse = await axios.post(
+              '/seckill/payment/process?paymentId=' + paymentData.id +
+              '&thirdPartyTransactionNo=' + this.generateTransactionNo(),
+              null,
+              { headers: this.getHeaders() }
+            );
+
             // 直接检查返回的布尔值
             if (processResponse.data) {
               this.$message.success('支付成功！');
               setTimeout(() => {
-                window.location.href = "/order/detail?orderCode=" + this.orderDetail.orderNo;
+                window.location.href = "/order/detail?orderCode=" + this.orderDetail.code;
               }, 1500);
             } else {
               throw new Error('支付处理失败');

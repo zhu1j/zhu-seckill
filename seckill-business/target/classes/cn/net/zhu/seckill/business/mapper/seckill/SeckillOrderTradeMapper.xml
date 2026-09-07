@@ -19,6 +19,7 @@
         <result property="productName" column="product_name"/>
         <result property="model" column="model"/>
         <result property="price" column="price"/>
+        <result property="cover" column="cover"/>
         <result property="costPrice" column="cost_price"/>
         <result property="quantity" column="quantity"/>
         <result property="remark" column="remark"/>
@@ -47,6 +48,7 @@
           product_name,
           model,
           price,
+          cover,
           cost_price,
           quantity,
           remark,
@@ -259,7 +261,7 @@
         WHERE id = #{id}
     </update>
 
-    <insert id="insert" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillOrderTradeEntity" keyProperty="id" userGeneratedKeys="true">
+    <insert id="insert" parameterType="cn.net.zhu.seckill.business.entity.seckill.SeckillOrderTradeEntity" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO seckill_order_trade
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -307,6 +309,9 @@
                 <if test="price != null">
                     price,
                 </if>
+                <if test="cover != null and cover != ''">
+                    cover,
+                </if>
                 <if test="costPrice != null">
                     cost_price,
                 </if>
@@ -343,76 +348,79 @@
                         #{id},
                     </if>
                     <if test="tradeId != null">
-                        trade_id = #{tradeId},
+                        #{tradeId},
                     </if>
                     <if test="code != null and code != ''">
-                        code = #{code},
+                        #{code},
                     </if>
                     <if test="userId != null">
-                        user_id = #{userId},
+                        #{userId},
                     </if>
                     <if test="userName != null and userName != ''">
-                        user_name = #{userName},
+                        #{userName},
                     </if>
                     <if test="orderTime != null">
-                        order_time = #{orderTime},
+                        #{orderTime},
                     </if>
                     <if test="orderStatus != null">
-                        order_status = #{orderStatus},
+                        #{orderStatus},
                     </if>
                     <if test="payStatus != null">
-                        pay_status = #{payStatus},
+                        #{payStatus},
                     </if>
                     <if test="totalAmount != null">
-                        total_amount = #{totalAmount},
+                        #{totalAmount},
                     </if>
                     <if test="paymentAmount != null">
-                        payment_amount = #{paymentAmount},
+                        #{paymentAmount},
                     </if>
                     <if test="seckillProductId != null">
-                        seckill_product_id = #{seckillProductId},
+                        #{seckillProductId},
                     </if>
                     <if test="productId != null">
-                        product_id = #{productId},
+                        #{productId},
                     </if>
                     <if test="productName != null and productName != ''">
-                        product_name = #{productName},
+                        #{productName},
                     </if>
                     <if test="model != null and model != ''">
-                        model = #{model},
+                        #{model},
                     </if>
                     <if test="price != null">
-                        price = #{price},
+                        #{price},
+                    </if>
+                    <if test="cover != null and cover != ''">
+                        #{cover},
                     </if>
                     <if test="costPrice != null">
-                        cost_price = #{costPrice},
+                        #{costPrice},
                     </if>
                     <if test="quantity != null">
-                        quantity = #{quantity},
+                        #{quantity},
                     </if>
                     <if test="remark != null and remark != ''">
-                        remark = #{remark},
+                        #{remark},
                     </if>
                     <if test="createUserId != null">
-                        create_user_id = #{createUserId},
+                        #{createUserId},
                     </if>
                     <if test="createUserName != null and createUserName != ''">
-                        create_user_name = #{createUserName},
+                        #{createUserName},
                     </if>
                     <if test="createTime != null">
-                        create_time = #{createTime},
+                        #{createTime},
                     </if>
                     <if test="updateUserId != null">
-                        update_user_id = #{updateUserId},
+                        #{updateUserId},
                     </if>
                     <if test="updateUserName != null and updateUserName != ''">
-                        update_user_name = #{updateUserName},
+                        #{updateUserName},
                     </if>
                     <if test="updateTime != null">
-                        update_time = #{updateTime},
+                        #{updateTime},
                     </if>
                     <if test="isDel != null">
-                        is_del = #{isDel},
+                        #{isDel},
                     </if>
                 </trim>
     </insert>

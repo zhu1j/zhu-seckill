@@ -559,7 +559,20 @@
         </div>
         
         <!-- 主要内容区域 -->
-        <div class="content-grid">
+        <div class="content-grid" th:if="${orderDetail eq null}">
+          <div class="order-card">
+            <div class="card-header">
+              <div class="order-number">
+                <i class="fas fa-info-circle"></i>
+                订单不存在或已被删除
+              </div>
+            </div>
+            <p style="padding: 20px; font-size: 14px; color: #6c757d;">
+              请检查订单号是否正确，或 <a href="/order/list" style="color: #007bff;">返回订单列表</a>
+            </p>
+          </div>
+        </div>
+        <div class="content-grid" th:if="${orderDetail ne null}">
           <!-- 订单信息卡片 -->
           <div class="order-card">
             <div class="card-header">
@@ -750,7 +763,7 @@
            },
            onPay: function() {
              // 跳转到支付页面，使用字符串避免精度丢失
-             const orderCode = '[[${orderDetail.code}]]';
+             const orderCode = '[[${orderDetail?.code}]]';
              if (orderCode && orderCode.toString().length > 0) {
                  window.location.href = '/payment?orderCode=' + orderCode;
              } else {
@@ -759,7 +772,7 @@
            },
            onCancelOrder: function() {
              // 取消订单功能
-             const orderCode = '[[${orderDetail.code}]]';
+             const orderCode = '[[${orderDetail?.code}]]';
              if (!orderCode) {
                alert('订单编号不能为空');
                return;

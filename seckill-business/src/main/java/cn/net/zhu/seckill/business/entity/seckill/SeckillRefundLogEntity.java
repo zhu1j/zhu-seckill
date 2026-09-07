@@ -21,7 +21,7 @@ import java.util.Date;
  *
  * "Run the code. Run the world."
  */
-@ApiModel("秒杀退货日志实体")
+@ApiModel("秒杀退款日志实体")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

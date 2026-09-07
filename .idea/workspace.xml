@@ -4,8 +4,193 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.9.7 修复下单不检查DB扣库存结果">
+    <list default="true" id="8e7deae8-f16f-4494-b550-8977836a21ea" name="Changes" comment="2026.9.7 修复BUG-08 job 模块 Redis 配置错误：秒杀进度写入 Redis DB0，api 读 DB5，前端永远看不到进度">
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/config/ApiWarmupConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/config/ResourceConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/ErrorControllerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/axios/axios.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/css/bootstrap-theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/css/bootstrap-theme.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/css/bootstrap-theme.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/css/bootstrap-theme.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/bootstrap/js/npm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/clear-cookie.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/element-ui/fonts/element-icons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/element-ui/fonts/element-icons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/element-ui/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/element-ui/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/img/bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/img/bg1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/img/bg2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/img/iphone8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/img/iphonex.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/img/meta10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/img/mi6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/jquery-validation/additional-methods.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/jquery-validation/jquery.validate.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/jquery-validation/localization/messages_zh.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/js/common.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/js/login-check.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/js/md5.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/js/vue-common.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/layer/layer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/layer/mobile/layer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/layer/mobile/need/layer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/layer/skin/default/icon-ext.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/layer/skin/default/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/layer/skin/default/layer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/layer/skin/default/loading-0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/layer/skin/default/loading-1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/layer/skin/default/loading-2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/test-error.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/vue/js.cookie.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/vue/jsencrypt.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/vue/vue-router.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/static/vue/vue.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/EsWarmupConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/JvmWarmupConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/RedisWarmupConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/SignEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillProductConditionEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/json/JacksonMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/ApiResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/ApiResultUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/HttpUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/JsonUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/Md5Util.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/ReTryUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/SignUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/TokenUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/config/FilterConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/config/FilterConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/controller/TestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/java/cn/net/zhu/seckill/api/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/order_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/order_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/order_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/order_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/payment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/src/main/resources/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/config/FilterConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/config/FilterConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/config/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/config/WebConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/controller/OrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/controller/TestController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/exception/GlobalExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/cn/net/zhu/seckill/api/exception/GlobalExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/templates/order_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/templates/order_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/templates/order_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/templates/order_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/templates/payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/templates/payment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/classes/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/classes/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/BusinessConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/BusinessConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/IdGenerateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/IdGenerateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/RestTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/RestTemplateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/RocketMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/RocketMQConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/StockConsistencyConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/config/StockConsistencyConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/constant/KeyConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/constant/KeyConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/constant/NumberConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/constant/NumberConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/context/UserContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/context/UserContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/RequestPageEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/RequestPageEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/ResponsePageEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/ResponsePageEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth/AuthUserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth/AuthUserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth/CaptchaEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth/CaptchaEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth/TokenEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth/TokenEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/mq/OrderTimeoutMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/mq/OrderTimeoutMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/EsBaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/EsBaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/EsSeckillProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/EsSeckillProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillOrderTradeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillOrderTradeEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillPaymentEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillPaymentEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillProductDetailPageEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillProductDetailPageEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundLogEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundLogEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductTradeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductTradeEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/user/SeckillUserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/user/SeckillUserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/user/UserRegisterEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/user/UserRegisterEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/enums/OrderStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/enums/OrderStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/enums/PayStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/enums/PayStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/enums/PaymentStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/enums/PaymentStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/enums/RefundStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/enums/RefundStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/exception/BusinessException.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/exception/BusinessException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/filter/JwtTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/filter/JwtTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/helper/IdGenerateHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/helper/IdGenerateHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/helper/UserTokenHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/helper/UserTokenHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/SeckillPaymentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/SeckillPaymentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/SeckillRefundServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/SeckillRefundServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/UserSeckillProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/service/impl/UserSeckillProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/PasswordUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/PasswordUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/SnowFlakeIdWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/SnowFlakeIdWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/SpringUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/java/cn/net/zhu/seckill/business/util/SpringUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/src/main/resources/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/BusinessConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/BusinessConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/IdGenerateConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/IdGenerateConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/RestTemplateConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/RestTemplateConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/RocketMQConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/RocketMQConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/StockConsistencyConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/config/StockConsistencyConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/constant/KeyConstant.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/constant/KeyConstant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/constant/NumberConstant.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/constant/NumberConstant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/context/UserContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/context/UserContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/BaseEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/BaseEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/RequestPageEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/RequestPageEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/ResponsePageEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/ResponsePageEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/auth/AuthUserEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/auth/AuthUserEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/auth/CaptchaEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/auth/CaptchaEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/auth/TokenEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/auth/TokenEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/mq/OrderTimeoutMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/mq/OrderTimeoutMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/ESSeckillProductEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/ESSeckillProductEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/EsBaseEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/EsBaseEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillOrderTradeEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillOrderTradeEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillPaymentEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillPaymentEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillProductDetailPageEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillProductDetailPageEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillProductEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillProductEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundLogEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/SeckillRefundLogEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductTradeEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/seckill/UserSeckillProductTradeEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/user/SeckillUserEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/user/SeckillUserEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/user/UserRegisterEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/entity/user/UserRegisterEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/enums/OrderStatusEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/enums/OrderStatusEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/enums/PayStatusEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/enums/PayStatusEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/enums/PaymentStatusEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/enums/PaymentStatusEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/enums/RefundStatusEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/enums/RefundStatusEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/exception/BusinessException.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/exception/BusinessException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/filter/JwtTokenFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/filter/JwtTokenFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/helper/IdGenerateHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/helper/IdGenerateHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/helper/UserTokenHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/helper/UserTokenHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/mapper/seckill/SeckillOrderTradeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/impl/ProductServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/impl/ProductServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/impl/SeckillPaymentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/impl/SeckillPaymentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/impl/SeckillRefundServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/impl/SeckillRefundServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/impl/UserSeckillProductServiceImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/impl/UserSeckillProductServiceImpl$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/impl/UserSeckillProductServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/service/impl/UserSeckillProductServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/PasswordUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/PasswordUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/SnowFlakeIdWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/SnowFlakeIdWorker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/SpringUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/classes/cn/net/zhu/seckill/business/util/SpringUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-business/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-business/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seckill-job/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-job/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/seckill-job/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/seckill-job/target/classes/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,8 +251,14 @@
   "keyToString": {
     "HTTP Request.generated-requests | #4.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.seckill-api [clean].executor": "Run",
+    "Maven.seckill-api [compile].executor": "Run",
+    "Maven.seckill-business [clean].executor": "Run",
+    "Maven.seckill-business [compile].executor": "Run",
+    "Maven.seckill-job [compile].executor": "Run",
     "Maven.zhu-seckill [clean].executor": "Run",
     "Maven.zhu-seckill [compile].executor": "Run",
+    "Maven.zhu-seckill [install].executor": "Run",
     "Maven.zhu-seckill [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
@@ -79,9 +270,10 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.ApiApplication.executor": "Run",
+    "Spring Boot.JobApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/34129/Desktop/个人待办/精进计划/self/seckill/seckill-business/src/main/java/cn/net/zhu/seckill/business/entity/auth",
+    "last_opened_file_path": "C:/Users/34129/Desktop/个人待办/精进计划/self/seckill/seckill-api/src/main/resources/static",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -90,19 +282,20 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3402299",
-    "settings.editor.selected.configurable": "editing.templates",
+    "settings.editor.selected.configurable": "MavenSettings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\java\cn\net\zhu\seckill\business\entity\auth" />
+      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-api\src\main\resources\static" />
+      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-api\src\main\java\cn\net\zhu\seckill\api\controller" />
+      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-api\src\main\java\cn\net\zhu\seckill\api\config" />
+      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\java\cn\net\zhu\seckill\business\json" />
       <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\java\cn\net\zhu\seckill\business\util" />
-      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\java\cn\net\zhu\seckill\business\service\impl" />
-      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\resources\cn\net\zhu\seckill\business\mapper" />
-      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-api\src\main\resources\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\java\cn\net\zhu\seckill\business\config" />
       <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\resources" />
       <recent name="C:\Users\34129\Desktop\个人待办\精进计划\self\seckill\seckill-business\src\main\resources\cn\net\zhu\seckill\business\mapper\user" />
     </key>
@@ -120,7 +313,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ApiApplication">
+  <component name="RunManager" selected="Spring Boot.JobApplication">
     <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#4" index="4" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -137,8 +330,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="JobApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="seckill-job" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.net.zhu.seckill.job.JobApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.net.zhu.seckill.job.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.JobApplication" />
         <item itemvalue="Spring Boot.ApiApplication" />
         <item itemvalue="HTTP Request.generated-requests | #4" />
       </list>
@@ -174,7 +381,7 @@
       <workItem from="1788480712536" duration="1228000" />
       <workItem from="1788505433284" duration="1220000" />
       <workItem from="1788584411330" duration="30830000" />
-      <workItem from="1788746969292" duration="9254000" />
+      <workItem from="1788746969292" duration="26731000" />
     </task>
     <task id="LOCAL-00001" summary="第一次提交">
       <option name="closed" value="true" />
@@ -312,7 +519,23 @@
       <option name="project" value="LOCAL" />
       <updated>1788762093972</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="2026.9.7 修复BUG-08 job 模块 Redis 配置错误：秒杀进度写入 Redis DB0，api 读 DB5，前端永远看不到进度">
+      <option name="closed" value="true" />
+      <created>1788762643872</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1788762643872</updated>
+    </task>
+    <task id="LOCAL-00019" summary="2026.9.7 修复BUG-08 job 模块 Redis 配置错误：秒杀进度写入 Redis DB0，api 读 DB5，前端永远看不到进度">
+      <option name="closed" value="true" />
+      <created>1788762654636</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1788762654636</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,6 +569,7 @@
     <MESSAGE value="2026.9.6第十三次提交：第十一阶段：订单超时模块;第十二阶段：库存一致性模块" />
     <MESSAGE value="2026.9.6第十四次提交 后续" />
     <MESSAGE value="2026.9.7 修复下单不检查DB扣库存结果" />
-    <option name="LAST_COMMIT_MESSAGE" value="2026.9.7 修复下单不检查DB扣库存结果" />
+    <MESSAGE value="2026.9.7 修复BUG-08 job 模块 Redis 配置错误：秒杀进度写入 Redis DB0，api 读 DB5，前端永远看不到进度" />
+    <option name="LAST_COMMIT_MESSAGE" value="2026.9.7 修复BUG-08 job 模块 Redis 配置错误：秒杀进度写入 Redis DB0，api 读 DB5，前端永远看不到进度" />
   </component>
 </project>

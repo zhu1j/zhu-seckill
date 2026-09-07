@@ -4,6 +4,7 @@ import cn.net.zhu.seckill.business.entity.seckill.*;
 import cn.net.zhu.seckill.business.helper.IdGenerateHelper;
 import cn.net.zhu.seckill.business.mapper.seckill.*;
 import cn.net.zhu.seckill.business.service.SeckillRefundService;
+import cn.net.zhu.seckill.business.service.StockConsistencyService;
 import cn.net.zhu.seckill.business.util.OrderCodeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +52,10 @@ public class SeckillRefundServiceImpl implements SeckillRefundService {
      * 雪花ID生成工具，生成退款、退款日志主键
      */
     private final IdGenerateHelper idGenerateHelper;
+    /**
+     * 库存一致性服务，退款成功恢复DB+Redis库存
+     */
+    private final StockConsistencyService stockConsistencyService;
 
     /**
      * 用户发起退款申请
@@ -75,10 +80,10 @@ public class SeckillRefundServiceImpl implements SeckillRefundService {
 //        if (existing != null && (existing.getRefundStatus() == 1 || existing.getRefundStatus() == 2)) {
 //            throw new RuntimeException("该订单已有退货申请在处理中");
 //        }
-        // 改后：遍历该订单所有退款记录，只要有一条在处理中就拦下
+        // 遍历该订单所有退款记录，只要有一条在处理中就拦下（注意 anyMatch：空集合返回false放行）
         List<SeckillRefundEntity> existingList = seckillRefundMapper.findByOrderCode(orderCode);
         boolean processing = existingList.stream()
-                .allMatch(r -> r.getRefundStatus() == 1 || r.getRefundStatus() == 2);
+                .anyMatch(r -> Objects.equals(r.getRefundStatus(), 1) || Objects.equals(r.getRefundStatus(), 2));
         if (processing) {
             throw new RuntimeException("该订单已有退货申请在处理中");
         }
@@ -97,6 +102,16 @@ public class SeckillRefundServiceImpl implements SeckillRefundService {
         refund.setRefundStatus(1); // 申请中
         refund.setApplyTime(new Date());
         refund.setCreateTime(new Date());
+        // 创建人信息，满足表NOT NULL约束
+        refund.setCreateUserId(order.getUserId());
+        refund.setCreateUserName(order.getUserName());
+
+        // 关联该订单最近一笔支付流水，退款成功时联动更新支付状态为已退款
+        List<SeckillPaymentEntity> payments = seckillPaymentMapper.findByOrderCode(orderCode);
+        if (payments != null && !payments.isEmpty()) {
+            refund.setPaymentId(payments.get(0).getId());
+            refund.setPaymentNo(payments.get(0).getPaymentNo());
+        }
         seckillRefundMapper.insert(refund);
 
         // 记录退款操作日志：用户提交退款申请
@@ -192,6 +207,9 @@ public class SeckillRefundServiceImpl implements SeckillRefundService {
                 order.setPayStatus(3);   // 退款
                 order.setOrderStatus(4); // 已取消
                 seckillOrderTradeMapper.update(order);
+
+                // 退款成功恢复库存（DB预扣库存+Redis缓存库存），防止库存泄漏
+                stockConsistencyService.restoreStock(order.getSeckillProductId(), order.getQuantity());
             }
 
             recordRefundLog(refundId, refund.getRefundNo(), 5, "退款成功-" + thirdPartyRefundNo,

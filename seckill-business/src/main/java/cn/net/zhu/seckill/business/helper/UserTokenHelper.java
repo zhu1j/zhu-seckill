@@ -1,5 +1,6 @@
 package cn.net.zhu.seckill.business.helper;
 
+import cn.net.zhu.seckill.business.exception.BusinessException;
 import cn.net.zhu.seckill.business.util.RedisUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -8,9 +9,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+
+
+import static cn.net.zhu.seckill.business.filter.JwtTokenFilter.LOGIN_AGAN_INFO;
+
 
 /**
  *  JWT生成与解析
@@ -93,14 +99,18 @@ public class UserTokenHelper {
      * @return JWT的Claims声明对象
      */
     public Claims getClaimsFromToken(String token) {
+        Claims claims;
         try {
-            return Jwts.parser()
-                    .setSigningKey(tokenSecret)
+            claims = Jwts.parser()
+                    .setSigningKey(getTokenSecret())
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
-            return null;
+            // 只打简短日志，避免无效token刷屏完整堆栈
+            log.warn("JWT解析失败: {}", e.getMessage());
+            throw new BusinessException(HttpStatus.FORBIDDEN.value(), LOGIN_AGAN_INFO);
         }
+        return claims;
     }
 
     /**
@@ -119,5 +129,14 @@ public class UserTokenHelper {
      */
     public String getUserKey(String username) {
         return String.format("%s%s", USER_PREFIX, username);
+    }
+
+    /**
+     * 计算过期时间
+     *
+     * @return Date
+     */
+    protected Date generateExpired() {
+        return new Date(System.currentTimeMillis() + tokenExpireTimeInRecord * 1000);
     }
 }

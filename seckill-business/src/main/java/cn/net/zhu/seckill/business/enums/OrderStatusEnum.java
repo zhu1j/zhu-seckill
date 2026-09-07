@@ -11,8 +11,6 @@ import lombok.Getter;
  *
  * "Run the code. Run the world."
  */
-@Getter
-@AllArgsConstructor
 public enum OrderStatusEnum {
     ORDERED(1,"下单"),
     PAID(2,"支付"),
@@ -22,11 +20,44 @@ public enum OrderStatusEnum {
     private final int value;
     private final String desc;
 
-    public static String getDescByValue(Integer value){
-        if (value == null) return "未知";
-        for (OrderStatusEnum e : values()) {
-            if (e.value == value) return e.desc;
+    OrderStatusEnum(Integer value, String desc) {
+        this.value = value;
+        this.desc = desc;
+    }
+    public Integer getValue() {
+        return value;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    /**
+     * 根据值获取枚举
+     *
+     * @param value 状态值
+     * @return 订单状态枚举
+     */
+    public static OrderStatusEnum getByValue(Integer value) {
+        if (value == null) {
+            return null;
         }
-        return "未知";
+        for (OrderStatusEnum statusEnum : OrderStatusEnum.values()) {
+            if (statusEnum.getValue().equals(value)) {
+                return statusEnum;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据值获取描述
+     *
+     * @param value 状态值
+     * @return 状态描述
+     */
+    public static String getDescByValue(Integer value) {
+        OrderStatusEnum statusEnum = getByValue(value);
+        return statusEnum != null ? statusEnum.getDesc() : "未知状态";
     }
 }

@@ -1,12 +1,53 @@
 spring:
   application:
-    name: seckill-api
+    name: seckill-job
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/zhu_seckill?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zhu_seckill?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull
     username: root
     password: root
+  redis:
+    database: 5
+    host: 127.0.0.1
+    port: 6379
+#    password:
+    timeout: 50000
+  elasticsearch:
+    host: 127.0.0.1
+    port: 9200
+ #   username: elastic
+#    password:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
 
 server:
-  port: 8014
+  port: 8016
+seckill:
+  orderApiProperties:
+    host: http://127.0.0.1:8011
+    createOrderUrl: /v1/web/trade/createForSeckill
+    secretKey: zhu1j
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: zhu-seckill-group
+    send-message-timeout: 3000
+    # 禁用VIP通道，避免端口映射问题
+    vip-channel-enabled: false
+  # 客户端配置
+  client:
+    # 强制使用公网地址
+    client-ip: 127.0.0.1
+logging:
+  level:
+    cn:
+      net:
+        zhu:
+          seckill:
+            business:
+              mapper: debug

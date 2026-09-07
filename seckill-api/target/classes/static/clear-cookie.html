@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>清除Cookie测试</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="/js/login-check.js"></script>
+</head>
+<body>
+    <h1>清除Cookie并测试登录弹窗</h1>
+    <button onclick="clearCookie()">清除SUSAN-TOKEN Cookie</button>
+    <button onclick="testLoginPopup()">测试登录弹窗</button>
+    <button onclick="goToProductList()">跳转到商品列表</button>
+    <div id="result"></div>
+    
+    <script>
+        function clearCookie() {
+            document.cookie = 'SUSAN-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.getElementById('result').innerHTML = 'Cookie已清除';
+            console.log('Cookie已清除');
+        }
+        
+        function testLoginPopup() {
+            console.log('开始测试登录弹窗...');
+            
+            axios.post("/searchProductList", {pageNo:1, pageSize:10}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic@' + (getCookie('SUSAN-TOKEN') || 'undefined')
+                }
+            })
+            .then(res => {
+                console.log('响应:', res);
+                console.log('响应数据:', res.data);
+                
+                // 检查业务层面的错误码
+                if (res.data && res.data.code === 403) {
+                    console.log('检测到403错误，显示登录弹窗');
+                    const message = res.data.message || '您的登录状态已过期，为了保护您的账户安全，请重新登录后继续购物';
+                    LoginChecker.showLoginDialog(message, function() {
+                        console.log('用户点击了登录按钮');
+                        window.location.href = '/login';
+                    });
+                    document.getElementById('result').innerHTML = '检测到403错误，已显示登录弹窗';
+                } else {
+                    console.log('正常响应，显示商品数据');
+                    document.getElementById('result').innerHTML = '成功获取商品列表: ' + (res.data.data ? res.data.data.length : 0) + ' 个商品';
+                }
+            })
+            .catch(error => {
+                console.log('网络错误:', error);
+                document.getElementById('result').innerHTML = '网络错误: ' + error.message;
+            });
+        }
+        
+        function getCookie(name) {
+            const value = "; " + document.cookie;
+            const parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+            return null;
+        }
+        
+        function goToProductList() {
+            window.location.href = '/product/list';
+        }
+    </script>
+</body>
+</html>

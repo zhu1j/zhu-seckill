@@ -19,7 +19,8 @@ public class FilterConfig {
     @Bean
     public FilterRegistrationBean<JwtTokenFilter> registrationBean() {
         FilterRegistrationBean<JwtTokenFilter> bean = new FilterRegistrationBean<JwtTokenFilter>(new JwtTokenFilter());
-        bean.addUrlPatterns("/");
+        // 拦截所有路径：JwtTokenFilter内部对无token请求直接放行，有token才做鉴权
+        bean.addUrlPatterns("/*");
         return bean;
     }
 }

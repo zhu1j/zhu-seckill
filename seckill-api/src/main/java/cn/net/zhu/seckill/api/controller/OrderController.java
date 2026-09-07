@@ -46,6 +46,10 @@ public class OrderController {
     @GetMapping("/payment")
     public String goToPayment(@RequestParam("orderCode") String orderCode, Model model) {
         SeckillOrderTradeEntity order = seckillOrderTradeService.getOrderDetailByOrderNo(orderCode);
+        // 订单不存在兜底，避免页面渲染null报错
+        if (order == null) {
+            return "redirect:/order/list";
+        }
         model.addAttribute("orderDetail", order);
         return "payment";
     }
@@ -59,6 +63,10 @@ public class OrderController {
     @GetMapping("/order/detail")
     public String goToOrderDetail(@RequestParam("orderCode") String orderCode, Model model) {
         SeckillOrderTradeEntity order = seckillOrderTradeService.getOrderDetailByOrderNo(orderCode);
+        // 订单不存在兜底，避免页面渲染null报错
+        if (order == null) {
+            return "redirect:/order/list";
+        }
         model.addAttribute("orderDetail", order);
         return "order_detail";
     }

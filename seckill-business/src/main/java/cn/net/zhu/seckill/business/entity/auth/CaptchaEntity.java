@@ -17,6 +17,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CaptchaEntity {
+    /**
+     * 唯一标识
+     */
     private String uuid;
+
+    /**
+     * 验证码图片
+     */
     private String img;
 }

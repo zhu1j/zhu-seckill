@@ -35,8 +35,13 @@ public class JwtTokenFilter implements Filter {
         // 从请求头Authorization中获取token
         String token = request.getHeader("Authorization");
 
-        // 如果请求头没有携带token，直接放行（登录、注册等无需认证接口走这里）
-        if (!StringUtils.hasLength(token)) {
+        // 兼容前端 "Basic@" 前缀写法：剥离前缀还原为原始JWT
+        if (StringUtils.hasLength(token) && token.startsWith("Basic@")) {
+            token = token.substring("Basic@".length());
+        }
+
+        // 无token或未登录产生的垃圾值直接放行（登录、注册等公开接口走这里）
+        if (!StringUtils.hasLength(token) || "null".equals(token) || "undefined".equals(token)) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }

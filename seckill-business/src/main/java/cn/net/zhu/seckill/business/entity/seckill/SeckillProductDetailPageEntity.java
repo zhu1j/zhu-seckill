@@ -18,7 +18,7 @@ public class SeckillProductDetailPageEntity extends SeckillProductDetailEntity {
     /**
      * 距离秒杀开始剩余秒数，用于前端倒计时；0代表无倒计时
      */
-    private Long remainSeconds = 0L;
+    private Integer remainSeconds = 0;
 
     /**
      * 秒杀状态

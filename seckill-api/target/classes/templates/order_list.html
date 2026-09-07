@@ -880,9 +880,12 @@
                                             <i class="fas fa-times"></i>
                                             取消订单
                                         </a>
-                                        <a th:if="${order.orderStatus == 2}" 
-                                           href="#" 
-                                           class="btn btn-primary">
+                                        <a th:if="${order.orderStatus == 2 or order.orderStatus == 3}"
+                                           href="javascript:void(0)"
+                                           class="btn btn-primary"
+                                           onclick="viewLogistics(this)"
+                                           th:data-order-code="${order.code}"
+                                           th:data-order-status="${order.orderStatus}">
                                             <i class="fas fa-truck"></i>
                                             查看物流
                                         </a>
@@ -929,9 +932,9 @@
         </div>
     </div>
     
-    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" th:src="@{/vue/vue.min.js}"></script>
+<script type="text/javascript" th:src="@{/element-ui/index.js}"></script>
+<script type="text/javascript" th:src="@{/axios/axios.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/login-check.js}"></script>
     <script>
         // Vue.js 应用 - 与商品列表页面保持一致
@@ -939,7 +942,7 @@
             el: '.page-container',
             data: {
                 // 分页相关数据
-                currentPage: [[${currentPage}]] || 1,
+                currentPage: [[${pageNo}]] || 1,
                 pageSize: [[${pageSize}]] || 10,
                 totalCount: [[${totalCount}]] || 0,
                 
@@ -1020,6 +1023,58 @@
             }
         });
         
+        // 查看物流功能：弹窗展示模拟物流轨迹（与订单状态对齐）
+        function viewLogistics(element) {
+            const orderCode = element.getAttribute('data-order-code');
+            const orderStatus = element.getAttribute('data-order-status');
+            if (!orderCode) {
+                alert('订单编号不能为空');
+                return;
+            }
+            let logistics;
+            if (orderStatus === '3') {
+                // 已完成订单：完整物流轨迹
+                logistics =
+                    '<p><strong>快递公司：</strong>顺丰速运</p>' +
+                    '<p><strong>运单号：</strong>SF' + Date.now() + '</p>' +
+                    '<hr>' +
+                    '<p>【当前】快件已签收，感谢使用顺丰速运</p>' +
+                    '<p>【2小时前】快件已到达【杭州转运中心】，派送中</p>' +
+                    '<p>【1天前】快件已从【上海转运中心】发出</p>' +
+                    '<p>【1天前】商家已发货，顺丰速运已揽收</p>';
+            } else {
+                // 已支付订单：尚未发货
+                logistics =
+                    '<p><strong>快递公司：</strong>顺丰速运（待揽收）</p>' +
+                    '<p><strong>运单号：</strong>尚未生成</p>' +
+                    '<hr>' +
+                    '<p style="color:#856404;">商家正在备货中，预计 24 小时内发货</p>' +
+                    '<p style="color:#6c757d;">暂无物流轨迹，发货后可在本页面查看</p>';
+            }
+            const html =
+                '<div style="font-size:14px;line-height:2;">' +
+                '<p><strong>订单号：</strong>' + orderCode + '</p>' +
+                logistics +
+                '</div>';
+            const dialog = document.createElement('div');
+            dialog.id = 'logisticsDialog';
+            dialog.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;';
+            dialog.innerHTML =
+                '<div style="background:#fff;border-radius:8px;padding:24px;max-width:480px;width:90%;">' +
+                '<h3 style="margin:0 0 12px;"><i class="fas fa-truck"></i> 物流信息</h3>' + html +
+                '<div style="text-align:right;margin-top:16px;">' +
+                '<button onclick="document.getElementById(\'logisticsDialog\').remove()" ' +
+                'style="padding:6px 16px;border:none;border-radius:4px;background:#007bff;color:#fff;cursor:pointer;">关闭</button>' +
+                '</div></div>';
+            // 点击遮罩空白处也可关闭
+            dialog.addEventListener('click', function(e) {
+                if (e.target === dialog) {
+                    dialog.remove();
+                }
+            });
+            document.body.appendChild(dialog);
+        }
+
         // 取消订单功能
         function cancelOrder(element) {
             const orderCode = element.getAttribute('data-order-code');

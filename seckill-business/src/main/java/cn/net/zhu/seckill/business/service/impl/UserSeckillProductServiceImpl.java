@@ -13,6 +13,7 @@ import cn.net.zhu.seckill.business.mapper.user.SeckillUserMapper;
 import cn.net.zhu.seckill.business.service.OrderTimeoutService;
 import cn.net.zhu.seckill.business.service.ProductService;
 import cn.net.zhu.seckill.business.service.UserSeckillProductService;
+import cn.net.zhu.seckill.business.service.UserService;
 import cn.net.zhu.seckill.business.util.BusinessKeyUtil;
 import cn.net.zhu.seckill.business.util.OrderCodeUtil;
 import cn.net.zhu.seckill.business.util.RedisUtil;
@@ -23,6 +24,7 @@ import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -101,6 +103,11 @@ public class UserSeckillProductServiceImpl implements UserSeckillProductService 
     private final OrderTimeoutService orderTimeoutService;
 
     /**
+     * 用户服务，秒杀接口校验图形验证码，防止脚本刷接口
+     */
+    private final UserService userService;
+
+    /**
      * 秒杀RocketMQ Topic名称，配置文件读取
      */
     @Value("${seckill.seckillProductTopic:SECKILL_PRODUCT_TOPIC}")
@@ -127,12 +134,18 @@ public class UserSeckillProductServiceImpl implements UserSeckillProductService 
      */
     @Override
     public void doSeckillProduct(UserSeckillProductEntity entity) {
+        // 0.图形验证码校验：排队页传来的uuid+code，防脚本刷秒杀接口
+        userService.checkCode(entity.getUuid(), entity.getCode());
+
         // 1.登录校验：从ThreadLocal上下文获取当前登录用户
         UserEntity currentUser = UserContext.getCurrentUser();
         if (Objects.isNull(currentUser)) {
             throw new BusinessException(403, "请先登录");
         }
         entity.setUserName(currentUser.getUsername());
+
+        // 验证码使用完毕立即销毁，防止重复使用
+        userService.deleteCode(entity.getUuid());
 
         // 2.每日参与秒杀次数校验，每个用户每日最多参与10次秒杀
         checkUserSeckillCount(currentUser.getUsername());
@@ -282,6 +295,7 @@ public class UserSeckillProductServiceImpl implements UserSeckillProductService 
      * @param entity 用户秒杀请求实体
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void createOrder(UserSeckillProductEntity entity) {
         Long seckillProductId = entity.getSeckillProductId();
         String userName = entity.getUserName();
@@ -298,22 +312,23 @@ public class UserSeckillProductServiceImpl implements UserSeckillProductService 
         // 更新进度：状态3，75%，正在扣减数据库库存
         setSeckillProcessStatus(seckillProductId, userName, 3, 75, "正在扣减库存...");
 
-        //下单口库存前检查库存是否足够
+        // DB层面预扣锁定库存，并校验扣减结果：库存不足时抛异常，防止DB层超卖
         int affected = seckillProductMapper.reduceWithHoldStock(seckillProductId);
         if (affected <= 0) {
             throw new BusinessException("商品库存不足");
         }
 
-        // DB层面预扣锁定库存
-        seckillProductMapper.reduceWithHoldStock(seckillProductId);
-
         // 查询数据库用户信息
         cn.net.zhu.seckill.business.entity.user.SeckillUserEntity user =
                 seckillUserMapper.findByUsername(userName);
+        if (Objects.isNull(user)) {
+            throw new BusinessException("用户不存在");
+        }
 
         // 组装订单实体
         SeckillOrderTradeEntity order = new SeckillOrderTradeEntity();
         order.setId(idGenerateHelper.nextId());
+        order.setTradeId(order.getId()); // 交易ID与订单主键一致，满足表NOT NULL约束
         order.setCode(OrderCodeUtil.generateOrderCode());
         order.setUserId(user.getId());
         order.setUserName(userName);
@@ -323,12 +338,17 @@ public class UserSeckillProductServiceImpl implements UserSeckillProductService 
         order.setModel(esProduct.getModel());
         order.setPrice(esProduct.getPrice());
         order.setCostPrice(esProduct.getCostPrice());
+        order.setCover(esProduct.getCover());
         order.setQuantity(1);
         order.setTotalAmount(esProduct.getPrice());
         order.setPaymentAmount(esProduct.getPrice());
         order.setOrderStatus(1);  // 下单状态
         order.setPayStatus(1);    // 待支付
         order.setOrderTime(new Date());
+        // 创建人信息，满足表NOT NULL约束
+        order.setCreateUserId(user.getId());
+        order.setCreateUserName(userName);
+        order.setCreateTime(new Date());
 
         // 订单插入数据库
         seckillOrderTradeMapper.insert(order);
