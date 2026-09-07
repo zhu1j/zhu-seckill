@@ -1,0 +1,32 @@
+# IDEA IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# 编译输出
+out/
+build/
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# Maven
+target/
+
+# Gradle
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# 日志
+*.log
+logs/
+
+# 临时文件
+*.tmp
+*.bak
+*~
+
+#文档文件夹
+docs/
